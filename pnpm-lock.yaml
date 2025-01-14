@@ -29,7 +29,7 @@ importers:
         specifier: ^2.2.1
         version: 2.2.1
       '@legendapp/motion':
-        specifier: ^2.4.0
+        specifier: 2.4.0
         version: 2.4.0(patch_hash=tienuohcujepzdhs27gccrdtga)(nativewind@4.1.23(react-native-reanimated@3.16.6(@babel/core@7.26.0)(react-native@0.76.6(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1)(utf-8-validate@6.0.5))(react@18.3.1))(react-native-svg@15.11.1(react-native@0.76.6(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1)(utf-8-validate@6.0.5))(react@18.3.1))(react-native@0.76.6(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1)(utf-8-validate@6.0.5))(react@18.3.1)(tailwindcss@3.4.17))(react-native@0.76.6(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1)(utf-8-validate@6.0.5))(react@18.3.1)
       '@lottiefiles/dotlottie-react':
         specifier: ^0.12.0
@@ -92,7 +92,7 @@ importers:
         specifier: ^7.1.8
         version: 7.1.8(maplibre-gl@4.7.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-native-readium:
-        specifier: ^2.0.2
+        specifier: 2.0.2
         version: 2.0.2(patch_hash=ieig7i4lit56hsh3n4q4veggoe)(@babel/core@7.26.0)(browserslist@4.24.4)(react-native@0.76.6(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1)(utf-8-validate@6.0.5))(react@18.3.1)
       react-redux:
         specifier: ^9.2.0
