@@ -1,0 +1,37 @@
+import {Code} from 'react-exo/code';
+import {Theme} from '../../utils/theme';
+
+# Code
+
+> Displays syntax highlighted text via [shiki](https://shiki.style)
+
+<Theme>
+  {theme => (
+    <Code lang="typescript" theme={theme === 'dark' ? 'dark-plus' : 'light-plus'}>
+      {`console.log('Hello, world!')`}
+    </Code>
+  )}
+</Theme>
+
+```tsx twoslash
+import React from 'react';
+// ---cut---
+// @log: ↓ Import the component
+import {Code} from 'react-exo/code';
+
+// @log: ↓ Try the example
+<Code lang="typescript">
+  {`console.log('Hello, world!')`}
+</Code>
+
+```
+
+## Technology
+
+| Platform | Library | Support | Notes |
+| -------- | ---------- | :--------: | :---- |
+| Web | [shiki](https://shiki.style) | ✅ | Oniguruma Engine (WASM) |
+| Android | [react-native-shiki-engine](https://github.com/skiniks/react-native-shiki-engine) | ✅ | Oniguruma Engine (JSI) |
+| iOS | [react-native-shiki-engine](https://github.com/skiniks/react-native-shiki-engine) | ✅ | Oniguruma Engine (JSI) |
+| MacOS | [shiki](https://shiki.style) | ✅ | JS Engine |
+| Windows | [shiki](https://shiki.style) | ✅ | JS Engine |

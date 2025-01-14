@@ -1,0 +1,27 @@
+import {Markdown} from 'react-exo/markdown';
+
+# Markdown
+
+> Displays markdown formatted text via [markdown-it](https://github.com/markdown-it/markdown-it)
+
+<Markdown style={{body: {color: '#666'}}}>
+  {'# Hello [World](https://search.brave.com)'}
+</Markdown>
+
+```tsx twoslash
+import React from 'react';
+// ---cut---
+// @log: ↓ Import the component
+import {Markdown} from 'react-exo/markdown';
+
+// @log: ↓ Try the example
+<Markdown>
+  {'# Hello [World](https://search.brave.com)'}
+</Markdown>
+```
+
+## Technology
+
+| Platform | Library | Support | Notes |
+| -------- | ---------- | :--------: | :---- |
+| Universal | *custom* | ✅ | All platforms supported |

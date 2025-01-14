@@ -1,0 +1,40 @@
+import {Game} from 'react-exo/game';
+
+# Game
+
+> Displays game roms for 20+ platforms via [emulatorjs](https://emulatorjs.org)
+
+<Game
+  url="https://get.ult.dev/samples/dino.gb"
+  name="Dino's Offline Adventure"
+  platform="gb"
+  startOnLoaded
+  volume={0}
+  style={{
+    width: 444,
+    height: 400,
+  }}
+/>
+
+```tsx twoslash
+import React from 'react';
+// ---cut---
+// @log: ↓ Import the component
+import {Game} from 'react-exo/game';
+
+// @log: ↓ Try the example
+<Game
+  url="https://get.ult.dev/samples/dino.gb"
+  name="Dino's Offline Adventure"
+  platform="gb"
+  startOnLoaded
+  volume={0}
+/>
+```
+
+## Technology
+
+| Platform | Library | Support | Notes |
+| -------- | ---------- | :--------: | :---- |
+| Web | [emulatorjs](https://emulatorjs.org) | ✅ | Loaded via Iframe |
+| Native | [emulatorjs](https://emulatorjs.org) | ✅ | Loaded via WebView |

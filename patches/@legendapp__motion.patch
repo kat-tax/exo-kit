@@ -1,0 +1,17 @@
+diff --git a/package.json b/package.json
+index 7fd6b8d5dc47bad391c413c6f810b35b4e0bf8d1..d1271a13b3ccdb4af095b2295b14ef27c84b5655 100644
+--- a/package.json
++++ b/package.json
+@@ -9,7 +9,11 @@
+     "react-native": "src/",
+     "source": "src/",
+     "exports": {
+-        ".": "./index.js",
++        ".": {
++            "require": "./lib/commonjs/index.js",
++            "import": "./lib/module/index.js",
++            "types": "./index.d.ts"
++        },
+         "./svg": "./svg.js",
+         "./linear-gradient": "./linear-gradient.js",
+         "./linear-gradient-expo": "./linear-gradient-expo.js",

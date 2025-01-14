@@ -1,0 +1,21 @@
+# Build
+lib/
+gen/
+
+# Env
+.env*.local
+
+# Typescript
+*.tsbuildinfo
+
+# Vocs
+vocs.config.ts.timestamp-*
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# MacOS
+.DS_Store
+*.pem

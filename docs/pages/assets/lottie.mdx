@@ -1,0 +1,46 @@
+import {Lottie} from 'react-exo/lottie';
+
+# Lottie
+
+> Displays animation files via [lottie](https://lottiefiles.com)
+
+<Lottie
+  url="https://get.ult.dev/samples/cat.lottie"
+  width={400}
+  height={400}
+  autoplay
+  loop
+/>
+
+```tsx twoslash
+import React from 'react';
+// ---cut---
+// @log: ↓ Import the component
+import {Lottie} from 'react-exo/lottie';
+
+// @log: ↓ Try the example
+<Lottie
+  url="https://get.ult.dev/samples/cat.lottie"
+  width={400}
+  height={400}
+  autoplay
+  loop
+/>
+```
+
+## Dependencies
+
+:::warning
+For native support you must install [Skottie](https://github.com/margelo/react-native-skottie) and [Skia](https://shopify.github.io/react-native-skia)
+
+```sh
+npm i react-native-skottie @shopify/react-native-skia
+```
+:::
+
+## Technology
+
+| Platform | Library | Support | Notes |
+| -------- | ---------- | :--------: | :---- |
+| Web | [@lottiefiles/dotlottie-react](https://github.com/LottieFiles/dotlottie-web/blob/main/packages/react) | ✅ | - |
+| Native | [react-native-skottie](https://github.com/margelo/react-native-skottie) | ✅ | - |

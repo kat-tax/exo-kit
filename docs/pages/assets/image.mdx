@@ -1,0 +1,49 @@
+import {Image} from 'react-exo/image';
+
+# Image
+
+> Displays images with support for [blurhash](https://blurha.sh) and [thumbhash](https://evanw.github.io/thumbhash)
+
+<Image
+  url="https://get.ult.dev/samples/turing.jpg"
+  thumbhash="XwgGFoKwnYZxZ3emWReEaGV30FUKnLQ"
+  resizeMode="cover"
+  width={533}
+  height={400}
+/>
+
+```tsx twoslash
+import React from 'react';
+// ---cut---
+// @log: ↓ Import the component
+import {Image} from 'react-exo/image';
+
+// @log: ↓ Try the example
+<Image
+  url="https://get.ult.dev/samples/turing.jpg"
+  thumbhash="X/gFDYCii3dPdKlZRKiFbMAHC+Tb"
+  resizeMode="cover"
+  width={533}
+  height={400}
+/>
+```
+
+## Dependencies
+
+:::warning
+For Android & iOS support you must install [Faster Image](https://github.com/candlefinance/faster-image)
+
+```sh
+npm i @candlefinance/faster-image
+```
+:::
+
+## Technology
+
+| Platform | Library | Support | Notes |
+| -------- | ---------- | :--------: | ----- |
+| Web | *custom* | ✅ | Default platform caching |
+| Android | [faster-image](https://github.com/candlefinance/faster-image) | ✅ | - |
+| iOS | [faster-image](https://github.com/candlefinance/faster-image) | ✅ | - |
+| MacOS | *custom* | ✅ | Default platform caching |
+| Windows | *custom* | ✅ | Default platform caching |

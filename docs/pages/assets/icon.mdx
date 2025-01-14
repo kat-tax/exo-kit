@@ -1,0 +1,80 @@
+import {Icon} from 'react-exo/icon';
+import {Theme} from '../../utils/theme';
+
+# Icon
+
+> Displays over 200k icons via [iconify](https://icones.js.org)
+
+<div style={{display: 'flex', gap: 16}}>
+  <Theme>
+    {theme => <>
+      <span title="ph:cat">
+        <Icon 
+          name="ph:cat"
+          color={theme === 'dark' ? '#b1a9ff' : '#5753c6'}
+          size={48}
+        />
+      </span>
+      <span title="lucide:cat">
+        <Icon 
+          name="lucide:cat"
+          color={theme === 'dark' ? '#b1a9ff' : '#5753c6'}
+          size={48}
+        />
+      </span>
+      <span title="tdesign:cat">
+        <Icon 
+          name="tdesign:cat"
+          color={theme === 'dark' ? '#b1a9ff' : '#5753c6'}
+          size={48}
+        />
+      </span>
+      <span title="streamline:cat-1">
+        <Icon 
+          name="streamline:cat-1"
+          color={theme === 'dark' ? '#b1a9ff' : '#5753c6'}
+          size={48}
+        />
+      </span>
+    </>}
+  </Theme>
+</div>
+
+```tsx twoslash
+import React from 'react';
+// ---cut---
+// @log: ↓ Import the component
+import {Icon} from 'react-exo/icon';
+
+// @log: ↓ Try the example
+<Icon 
+  name="ph:cat"
+  color="#666"
+  size={48}
+/>
+```
+
+## Dependencies
+
+:::warning
+You must install [React Native SVG](https://github.com/software-mansion/react-native-svg)
+
+```sh
+npm i react-native-svg
+```
+
+For native, you must modify your **babel.config.js** file:
+
+```js
+{
+  plugins: ['react-exo/babel-plugin-iconify']
+}
+```
+:::
+
+## Technology
+
+| Platform | Library | Support | Notes |
+| -------- | ---------- | :--------: | :---- |
+| Web | [@iconify/react](https://iconify.design/docs/icon-components/react) | ✅ | Loads icons on demand |
+| Native | *custom* | ✅ | Used icons cached in bundle |

@@ -1,0 +1,37 @@
+# Navigation
+
+> A service to manage the layout and navigation of screens.
+
+```tsx twoslash
+// @noErrors
+import React from 'react';
+import {AppLayout} from 'AppLayout';
+import {ScreenHome} from 'modules/home/ScreenHome';
+import {ScreenTaskList} from 'modules/tasks/ScreenTaskList';
+import {ScreenTaskDetails} from 'modules/tasks/ScreenTaskDetails';
+import {ScreenSettings} from 'modules/settings/ScreenSettings';
+// ---cut---
+// @log: ↓ Import the components
+import {Router, Routes, Route} from 'react-exo/navigation';
+
+// @log: ↓ Import the History API
+import {history} from 'react-exo/redux';
+
+// @log: ↓ Create your Router component
+<Router history={history.state}>
+  <Routes>
+    <Route path="/" element={<AppLayout/>}>
+      <Route index element={<ScreenHome/>}/>
+      <Route path="tasks" element={<ScreenTaskList/>}/>
+      <Route path="tasks/:id" element={<ScreenTaskDetails/>}/>
+      <Route path="settings" element={<ScreenSettings/>}/>
+    </Route>
+  </Routes>
+</Router>
+```
+
+## Technology
+
+| Platform | Library | Support | Notes |
+| -------- | ---------- | :--------: | ----- |
+| Universal | [React Router](https://reactrouter.com) | ✅ | All platforms supported |

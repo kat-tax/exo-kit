@@ -1,0 +1,66 @@
+import 'react-exo/slider.css';
+import {Slider} from 'react-exo/slider';
+import {Button, Callout} from 'vocs/components';
+import {Theme} from '../../utils/theme';
+
+# Slider Widget
+
+> A component that allows selection of a value within a range.
+
+<Theme>
+  {theme => (
+    <Slider
+      step={1}
+      defaultValue={50}
+      onChange={console.log}
+      lowerLimit={0}
+      upperLimit={100}
+      rangeColor={theme === 'dark' ? '#666' : '#333'}
+      thumbColor={theme === 'dark' ? '#666' : '#333'}
+      trackColor={theme === 'dark' ? '#333' : '#666'}
+      disabled={false}
+      name="slider"
+      testID="0:0"
+    />
+  )}
+</Theme>
+
+```tsx twoslash
+import React from 'react';
+// ---cut---
+// @log: ↓ Import the component
+import {Slider} from 'react-exo/slider';
+
+// @log: ↓ Try the example
+<Slider
+  step={1}
+  value={50}
+  lowerLimit={0}
+  upperLimit={100}
+  onChange={console.log}
+  rangeColor="#666"
+  thumbColor="#666"
+  trackColor="#333"
+  disabled={false}
+  name="slider"
+  testID="0:0"
+  style={{}}
+/>
+```
+
+## Dependencies
+
+:::warning
+For native support you must install [React Native Community Slider](https://github.com/callstack/react-native-slider)
+
+```sh
+npm i @react-native-community/slider
+```
+:::
+
+## Technology
+
+| Platform | Library | Support | Notes |
+| -------- | ---------- | :--------: | :---- |
+| Web | [@radix-ui/react-slider](https://www.radix-ui.com/primitives/docs/components/slider) | ✅ | - |
+| Native | [@react-native-community/slider](https://github.com/callstack/react-native-slider) | ✅ | - |

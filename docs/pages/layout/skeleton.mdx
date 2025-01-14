@@ -1,0 +1,42 @@
+import {Skeleton} from 'react-exo/skeleton';
+import {Theme} from '../../utils/theme';
+
+# Skeleton
+
+> A utility to create placeholders via [react content loader](https://skeletonreact.com/)
+
+<Theme>
+  {theme => (
+    <Skeleton
+      speed={2}
+      width={340}
+      height={84}
+      viewBox="0 0 340 84"
+      backgroundColor={theme === 'dark' ? '#333' : '#999'}
+      foregroundColor={theme === 'dark' ? '#666' : '#CCC'}
+    />
+  )}
+</Theme>
+
+```tsx twoslash
+import React from 'react';
+// ---cut---
+// @log: ↓ Import the components
+import {Skeleton} from 'react-exo/skeleton';
+
+// @log: ↓ Try the example
+<Skeleton 
+  speed={2}
+  width={340}
+  height={84}
+  viewBox="0 0 340 84"
+  backgroundColor="#333"
+  foregroundColor="#666"
+/>
+```
+
+## Technology
+
+| Platform | Library | Support | Notes |
+| -------- | ---------- | :--------: | ----- |
+| Universal | [React Skeleton](https://skeletonreact.com) | ✅ | All platforms supported* |

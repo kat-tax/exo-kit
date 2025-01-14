@@ -1,0 +1,44 @@
+import {Pdf} from 'react-exo/pdf';
+
+# PDF
+
+> Displays portable document format files
+
+<Pdf
+  src="https://get.ult.dev/samples/ee.pdf"
+  width={408}
+  height={555}
+  maxZoom={5}
+  maxPageResolution={2048}
+  distanceBetweenPages={16}
+  onPageChange={console.log}
+/>
+
+```tsx twoslash
+import React from 'react';
+// ---cut---
+// @log: ↓ Import the component
+import {Pdf} from 'react-exo/pdf';
+
+// @log: ↓ Try the example
+<Pdf
+  src="https://get.ult.dev/samples/ee.pdf"
+  width={408}
+  height={555}
+  maxZoom={5}
+  maxPageResolution={2048}
+  distanceBetweenPages={16}
+  onPageChange={console.log}
+  style={undefined}
+/>
+```
+
+## Technology
+
+| Platform | Library | Support | Notes |
+| -------- | ---------- | :--------: | :---- |
+| Web | [MuPDF.js](https://github.com/ArtifexSoftware/mupdf.js) | ✅ | - |
+| Android | [react-native-pdf-renderer](https://github.com/douglasjunior/react-native-pdf-renderer) | ✅ | - |
+| iOS | [react-native-pdf-renderer](https://github.com/douglasjunior/react-native-pdf-renderer) | ✅ | - |
+| MacOS | - | ❌ | - |
+| Windows | - | ❌ | - |

@@ -1,0 +1,11 @@
+.exo-checkbox-root {
+  all: unset;
+}
+
+.exo-checkbox-root:hover {
+  opacity: 0.8;
+}
+
+.exo-checkbox-root:disabled {
+  opacity: 0.4;
+}

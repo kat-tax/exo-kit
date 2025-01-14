@@ -1,2 +1,5 @@
-# exo-kit
+# EXO KIT
+
 The Ultimate React Native Library
+
+>> Work in progress...

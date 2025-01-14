@@ -1,0 +1,51 @@
+import {Motion} from 'react-exo/motion';
+import {Shift} from '../../utils/shift';
+import {Theme} from '../../utils/theme';
+
+# Motion
+
+> A utility to declare animations, making it easy to transition between styles without needing to manage animations.
+
+<Theme>
+  {theme => (
+    <Shift>
+      {value => (
+        <Motion.View
+          initial={{x: 0, y: -50}}
+          animate={{x: value * 200, y: 0}}
+          whileHover={{scale: value * 1.5}}
+          transition={{type: 'spring'}}
+          whileTap={{y: 20}}
+          style={{
+            width: 100,
+            height: 100,
+            borderRadius: 10,
+            backgroundColor: theme === 'dark' ? '#333' : '#666',
+          }}
+        />
+      )}
+    </Shift>
+  )}
+</Theme>
+
+```tsx twoslash
+import React from 'react';
+// ---cut---
+// @log: ↓ Import the component
+import {Motion} from 'react-exo/motion';
+
+// @log: ↓ Try the example
+<Motion.View
+  initial={{x: 0, y: -50}}
+  animate={{x: 200, y: 0}}
+  transition={{type: 'spring'}}
+  whileHover={{scale: 1.5}}
+  whileTap={{x: 20}}
+/>
+```
+
+## Technology
+
+| Platform | Library | Support | Notes |
+| -------- | ---------- | :--------: | ----- |
+| Universal | [Legend Motion](https://legendapp.com/open-source/motion) | ✅ | All platforms supported |

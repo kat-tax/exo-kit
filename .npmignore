@@ -1,0 +1,9 @@
+.vscode/
+.github/
+cfg/
+docs/
+node_modules/
+patches/
+src/
+tsconfig.json
+vocs.config.ts

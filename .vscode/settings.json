@@ -1,0 +1,11 @@
+{
+  "material-icon-theme.folders.associations": {
+    "native": "target",
+    "assets/map": "global",
+    "assets/model": "unity",
+    "assets/rive": "animation",
+    "assets/game": "console",
+    "assets/book": "content",
+    "assets/note": "custom",
+  },
+}

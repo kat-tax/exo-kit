@@ -1,0 +1,48 @@
+import {Picker} from 'react-exo/picker';
+import {Button, Callout} from 'vocs/components';
+
+# Picker Widget
+
+> A component that allows selection of a value within a range.
+
+<Picker
+  style={undefined}
+  selectedValue={undefined}
+  onValueChange={console.log}>
+  <Picker.Item label="Default" value=""/>
+  <Picker.Item label="Light" value="light"/>
+  <Picker.Item label="Dark" value="dark"/>
+</Picker>
+
+```tsx twoslash
+import React from 'react';
+// ---cut---
+// @log: ↓ Import the component
+import {Picker} from 'react-exo/picker';
+
+// @log: ↓ Try the example
+<Picker
+  style={undefined}
+  selectedValue={undefined}
+  onValueChange={console.log}>
+  <Picker.Item label="Default" value=""/>
+  <Picker.Item label="Light" value="light"/>
+  <Picker.Item label="Dark" value="dark"/>
+</Picker>
+```
+
+## Dependencies
+
+:::warning
+You must install [React Native Community Picker](https://github.com/react-native-picker/picker)
+
+```sh
+npm i @react-native-picker/picker
+```
+:::
+
+## Technology
+
+| Platform | Library | Support | Notes |
+| -------- | ---------- | :--------: | :---- |
+| Universal | [@react-native-picker/picker](https://github.com/react-native-picker/picker) | ✅ | All platforms supported |

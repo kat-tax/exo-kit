@@ -1,0 +1,4 @@
+diff --git a/lib/src/components/ReadiumView.web.js b/lib/src/components/ReadiumView.web.jsx
+similarity index 100%
+rename from lib/src/components/ReadiumView.web.js
+rename to lib/src/components/ReadiumView.web.jsx

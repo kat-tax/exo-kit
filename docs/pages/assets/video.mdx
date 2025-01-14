@@ -1,0 +1,46 @@
+import {Video} from 'react-exo/video';
+
+# Video
+
+> Displays video content via [rnv](https://react-native-video.github.io/react-native-video) and web via [shaka](https://github.com/shaka-project/shaka-player)
+
+<Video
+  muted
+  controls
+  source={{
+    uri: 'https://get.ult.dev/samples/bunny.mp4',
+  }}
+/>
+
+```tsx twoslash
+import React from 'react';
+// ---cut---
+// @log: ↓ Import the component
+import {Video} from 'react-exo/video';
+
+// @log: ↓ Try the example
+<Video
+  muted
+  controls
+  source={{
+    uri: 'https://get.ult.dev/samples/bunny.mp4',
+  }}
+/>
+```
+
+## Dependencies
+
+:::warning
+You must install [React Native Video](https://react-native-video.github.io/react-native-video)
+
+```sh
+npm i react-native-video
+```
+:::
+
+## Technology
+
+| Platform | Library | Support | Notes |
+| -------- | ---------- | :--------: | :---- |
+| Web | [shaka](https://github.com/shaka-project/shaka-player) | ✅ | - |
+| Native | [react-native-video](https://react-native-video.github.io/react-native-video) | ✅ | - |

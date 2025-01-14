@@ -1,0 +1,54 @@
+import {Book} from 'react-exo/book';
+import {Theme} from '../../utils/theme';
+
+# Book
+
+> Displays epub files via [readium](https://readium.org)
+
+<div style={{height: 400, position: 'relative'}}>
+  <Theme>
+    {theme => (
+      <Book
+        url="https://alice.dita.digital/manifest.json"
+        height={400}
+        theme={theme === 'dark' ? 'night' : 'default'}
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+        }}
+      />
+    )}
+  </Theme>
+</div>
+
+```tsx twoslash
+import React from 'react';
+// ---cut---
+// @log: ↓ Import the component
+import {Book} from 'react-exo/book';
+
+// @log: ↓ Try the example
+<Book
+  url="https://get.ult.dev/samples/book.epub"
+  height={400}
+/>
+```
+
+## Dependencies
+
+:::warning
+For native support you must install [react-native-readium](https://github.com/5-stones/react-native-readium)
+
+```sh
+npm i react-native-readium
+```
+:::
+
+## Technology
+
+| Platform | Library | Support | Notes |
+| -------- | ---------- | :--------: | :---- |
+| Universal | [react-native-readium](https://github.com/5-stones/react-native-readium) | ✅ | All platforms supported |
