@@ -4,6 +4,7 @@ gen/
 
 # Env
 .env*.local
+TODO.md
 
 # Typescript
 *.tsbuildinfo
