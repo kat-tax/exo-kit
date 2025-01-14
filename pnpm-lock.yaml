@@ -5,12 +5,12 @@ settings:
   excludeLinksFromLockfile: false
 
 patchedDependencies:
-  '@legendapp/motion':
+  '@legendapp/motion@2.4.0':
     hash: tienuohcujepzdhs27gccrdtga
-    path: patches/@legendapp__motion.patch
-  react-native-readium:
+    path: patches/@legendapp__motion@2.4.0.patch
+  react-native-readium@2.0.2:
     hash: ieig7i4lit56hsh3n4q4veggoe
-    path: patches/react-native-readium.patch
+    path: patches/react-native-readium@2.0.2.patch
 
 importers:
 

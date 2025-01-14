@@ -287,8 +287,8 @@
   },
   "pnpm": {
     "patchedDependencies": {
-      "react-native-readium": "patches/react-native-readium.patch",
-      "@legendapp/motion": "patches/@legendapp__motion.patch"
+      "react-native-readium@2.0.2": "patches/react-native-readium@2.0.2.patch",
+      "@legendapp/motion@2.4.0": "patches/@legendapp__motion@2.4.0.patch"
     }
   }
 }
