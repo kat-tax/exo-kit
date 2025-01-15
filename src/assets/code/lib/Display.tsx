@@ -1,10 +1,11 @@
 import {Platform, ScrollView, StyleSheet, View} from 'react-native';
 import {Token} from './Token';
 
+import type {TextStyle} from 'react-native';
 import type {ThemedToken} from 'shiki/core';
 
-const fontSize = '14px';
-const lineHeight = '20px';
+const fontSize = 14;
+const lineHeight = 20;
 
 interface DisplayProps {
   tokens?: ThemedToken[][],
@@ -49,7 +50,7 @@ function genTokenKey(index: number, tokenIndex: number, token: ThemedToken) {
   return `token-${index}-${tokenIndex}-${token.offset}-${token.content}`;
 }
 
-function getTokenStyle({color, fontStyle, bgColor}: ThemedToken) {
+function getTokenStyle({color, fontStyle, bgColor}: ThemedToken): TextStyle  {
   const isItalic = fontStyle === 1;
   const isBold = fontStyle === 2;
   const isUnderline = fontStyle === 4;
@@ -90,5 +91,6 @@ const styles = StyleSheet.create({
   codeLine: {
     flexDirection: 'row',
     marginBottom: 0,
+    minHeight: lineHeight,
   },
 });
