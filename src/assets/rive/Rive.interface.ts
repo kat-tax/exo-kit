@@ -1,4 +1,4 @@
-import type {ViewStyle} from 'react-native';
+import type {DimensionValue, ViewStyle} from 'react-native';
 import type {Alignment, RiveRef} from 'rive-react-native';
 
 export type RiveComponent = (props: RiveProps) => React.ReactNode;
@@ -9,9 +9,9 @@ export interface RiveProps {
   /** Reference to the Rive runtime */
   ref?: React.Ref<RiveRef>,
   /** Width of the animation. */
-  width?: number,
+  width?: DimensionValue,
   /** Height of the animation. */
-  height?: number,
+  height?: DimensionValue,
   /** Style of the animation. */
   style?: ViewStyle,
   /** Resize mode of the animation. */
