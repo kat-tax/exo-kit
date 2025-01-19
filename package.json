@@ -1,6 +1,6 @@
 {
   "name": "react-exo",
-  "version": "0.18.10",
+  "version": "0.18.14",
   "type": "module",
   "types": "./lib/types/index.d.ts",
   "repository": {
@@ -229,7 +229,6 @@
     "react-native-linear-gradient": ">=2",
     "react-native-mmkv": ">=3",
     "react-native-pdf-renderer": ">=1.6",
-    "react-native-uitextview": ">=2.0.0",
     "react-native-screens": ">=4",
     "react-native-shiki-engine": ">=0.1",
     "react-native-skottie": ">=2",
@@ -308,7 +307,6 @@
     "react-native-skottie": "^2.1.4",
     "react-native-svg": "^15.10.1",
     "react-native-url-polyfill": "^2.0.0",
-    "react-native-uitextview": "^2.0.0-rc.0",
     "react-native-video": "^6.8.2",
     "react-native-web": "^0.19.13",
     "react-native-web-linear-gradient": "^1.1.2",

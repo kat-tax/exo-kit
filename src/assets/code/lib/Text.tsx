@@ -1,7 +1,7 @@
 import type {CSSProperties} from 'react';
-import type {CodeTokenProps} from '../Code.interface';
+import type {CodeTextProps} from '../Code.interface';
 
-export const Token = ({style, children}: CodeTokenProps) => (
+export const Text = ({style, children}: CodeTextProps) => (
   <span style={{
     ...style as CSSProperties,
     fontSize: `${style?.fontSize}px`,

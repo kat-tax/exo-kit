@@ -8,8 +8,8 @@ import type {CodeProps} from './Code.interface';
 
 const highlighterInit = createHighlighter({
   engine,
+  langs: [],
   themes: ['dark-plus', 'light-plus'],
-  langs: ['typescript', 'tsx'],
 });
 
 export function Code(props: CodeProps) {
@@ -17,22 +17,18 @@ export function Code(props: CodeProps) {
   const [tokens, setTokens] = useState<ThemedToken[][]>();
   const shiki = useRef<Awaited<typeof highlighterInit>>();
 
-  // Load language when it changes
   useEffect(() => {
-    if (!lang || lang === 'ansi' || lang === 'text') return;
-    if (shiki.current?.getLoadedLanguages().includes(lang)) return;
-    shiki.current?.loadLanguage(lang);
-  }, [lang]);
-
-  // Update tokens when children language, or theme changes
-  useEffect(() => {
-    (async () => {
+    (async (lang, theme) => {
       shiki.current = await highlighterInit;
-      setTokens(shiki.current.codeToTokensBase(children, {
-        lang: lang ?? 'text',
-        theme: theme ?? 'light-plus',
-      }));
-    })();
+      await Promise.all([
+        shiki.current?.loadLanguage(lang),
+        shiki.current?.loadTheme(theme),
+      ]);
+      setTokens(shiki.current.codeToTokensBase(
+        children,
+        {lang, theme},
+      ));
+    })(lang ?? 'text', theme ?? 'light-plus');
   }, [children, lang, theme]);
 
   return (

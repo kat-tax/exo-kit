@@ -41,7 +41,6 @@ export default defineConfig(env => mergeConfig(
           'react-native-screens',
           'react-native-skottie',
           'react-native-svg',
-          'react-native-uitextview',
           'react-native-video',
         ],
       },

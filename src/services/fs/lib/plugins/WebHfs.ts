@@ -185,11 +185,16 @@ export class WebHfsImpl implements HfsImpl {
       const isFile = entry.kind === "file";
       const isDirectory = entry.kind === "directory";
       const isSymlink = false;
-      const metadata = await readMetadata(wroot, entry.name, isFile);
+      let metadata: FileSystemEntryMetadata | undefined;
+      try {
+        metadata = await readMetadata(wroot, `${dirPath}/${entry.name}`, isFile);
+      } catch (e) {
+        console.warn(`>> [fs:web] failed to read metadata for "${dirPath}/${entry.name}":`, e);
+      }
       yield {
         name: entry.name,
-        size: metadata.size ?? 0,
-        lastModified: metadata.modificationTime ?? new Date(),
+        size: metadata?.size ?? 0,
+        lastModified: metadata?.modificationTime ?? new Date(),
         isFile,
         isSymlink,
         isDirectory,

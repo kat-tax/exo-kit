@@ -1,14 +1,26 @@
 import {usePageImage} from './usePageImage';
 
+import type {DimensionValue} from 'react-native';
+
 interface PdfPageProps {
   index: number,
-  width?: number | string,
-  height?: number | string,
+  width?: DimensionValue,
+  height?: DimensionValue,
   render: (index: number) => Promise<Uint8Array>,
 }
 
-export function PdfPage({index, width, height, render}: PdfPageProps) {
-  const img = usePageImage(index, render);
+export function PdfPage(props: PdfPageProps) {
+  const img = usePageImage(props.index, props.render);
+
+  const width = typeof props.width === 'number'
+    ? `${props.width}px`
+    : props.width?.toString()
+      ?? '100%';
+
+  const height = typeof props.height === 'number'
+    ? `${props.height}px`
+    : props.height?.toString()
+      ?? '100%';
 
   if (!img) {
     return (
@@ -17,6 +29,6 @@ export function PdfPage({index, width, height, render}: PdfPageProps) {
   }
 
   return (
-    <img src={img} alt={`Page ${index}`}/>
+    <img src={img} alt={`Page ${props.index}`}/>
   );
 }

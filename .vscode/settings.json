@@ -8,4 +8,5 @@
     "assets/book": "content",
     "assets/note": "custom",
   },
+  "typescript.tsdk": "node_modules/typescript/lib",
 }

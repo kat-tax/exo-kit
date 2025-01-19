@@ -27,7 +27,6 @@ export const Image: ImageComponent = (props: ImageProps) => {
       style={[props.style, {
         width: props.width,
         height: props.height,
-        // @ts-expect-error Web only props
         backgroundRepeat: 'no-repeat',
         backgroundImage: `url(${imagePlaceholder})`,
         backgroundSize: props.resizeMode,

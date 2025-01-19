@@ -1,4 +1,4 @@
-import type {ImageStyle} from 'react-native';
+import type {ImageStyle, DimensionValue} from 'react-native';
 
 export type ImageComponent = (props: ImageProps) => JSX.Element;
 
@@ -20,9 +20,9 @@ export interface ImageProps {
   /** URL of the image */
   url: string,
   /** Width of the image */
-  width?: number,
+  width?: DimensionValue,
   /** Height of the image */
-  height?: number,
+  height?: DimensionValue,
   /** Style of the image */
   style?: ImageStyle | undefined,
   /** Whether the image is draggable (web only) */

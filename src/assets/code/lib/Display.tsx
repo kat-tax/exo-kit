@@ -1,5 +1,5 @@
 import {Platform, ScrollView, StyleSheet, View} from 'react-native';
-import {Token} from './Token';
+import {Text} from './Text';
 
 import type {TextStyle} from 'react-native';
 import type {ThemedToken} from 'shiki/core';
@@ -15,25 +15,21 @@ interface DisplayProps {
 export function Display(props: DisplayProps) {
   const {tokens, children} = props;
   return (
-    <ScrollView style={styles.codeContainer}>
+    <ScrollView style={styles.root}>
       <ScrollView horizontal showsHorizontalScrollIndicator>
-        <View style={styles.codeScrollContainer}>
+        <View style={styles.contents}>
           {tokens ? tokens.map((line, index) => (
-            <View
-              key={genLineKey(index, line)}
-              style={styles.codeLine}>
-              {line.map((token, tokenIndex) => (
-                <Token
-                  key={genTokenKey(index, tokenIndex, token)}
-                  style={getTokenStyle(token)}>
+            <Text key={genLineKey(index, line)} style={{lineHeight}}>
+              {line.length > 0 ? line.map((token, tokenIndex) => (
+                <Text key={genTokenKey(index, tokenIndex, token)} style={getTokenStyle(token)}>
                   {token.content}
-                </Token>
-              ))}
-            </View>
+                </Text>
+              )) : '\n'}
+            </Text>
           )) : (
-            <Token style={{fontFamily, fontSize, lineHeight}}>
+            <Text style={{fontFamily, fontSize, lineHeight}}>
               {children}
-            </Token>
+            </Text>
           )}
         </View>
       </ScrollView>
@@ -78,19 +74,14 @@ const fontFamily = Platform.select({
 });
 
 const styles = StyleSheet.create({
-  codeContainer: {
+  root: {
     alignSelf: 'stretch',
     flexShrink: 1,
   },
-  codeScrollContainer: {
+  contents: {
     flexDirection: 'column',
     minWidth: '100%',
     // @ts-ignore
     whiteSpace: 'pre',
-  },
-  codeLine: {
-    flexDirection: 'row',
-    marginBottom: 0,
-    minHeight: lineHeight,
   },
 });

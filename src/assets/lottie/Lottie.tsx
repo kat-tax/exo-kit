@@ -17,10 +17,8 @@ export const Lottie: LottieComponent = (props: LottieProps) => {
           speed={props.speed}
           loop={props.loop}
           autoplay={props.autoplay}
-          style={{
-            width: props.width,
-            height: props.height,
-          }}
+          width={props.width as number | string}
+          height={props.height as number | string}
         />
       }
     </View>
