@@ -4,9 +4,6 @@ import {Text} from './Text';
 import type {TextStyle} from 'react-native';
 import type {ThemedToken} from 'shiki/core';
 
-const fontSize = 14;
-const lineHeight = 20;
-
 interface DisplayProps {
   tokens?: ThemedToken[][],
   children?: string,
@@ -14,14 +11,19 @@ interface DisplayProps {
 
 export function Display(props: DisplayProps) {
   const {tokens, children} = props;
+  const {fontFamily, fontSize, lineHeight} = typography;
   return (
     <ScrollView style={styles.root}>
       <ScrollView horizontal showsHorizontalScrollIndicator>
         <View style={styles.contents}>
           {tokens ? tokens.map((line, index) => (
-            <Text key={genLineKey(index, line)} style={{lineHeight}}>
+            <Text
+              key={genLineKey(index, line)}
+              style={{lineHeight}}>
               {line.length > 0 ? line.map((token, tokenIndex) => (
-                <Text key={genTokenKey(index, tokenIndex, token)} style={getTokenStyle(token)}>
+                <Text
+                  key={genTokenKey(index, tokenIndex, token)}
+                  style={getTokenStyle(token)}>
                   {token.content}
                 </Text>
               )) : '\n'}
@@ -51,6 +53,7 @@ function getTokenStyle({color, fontStyle, bgColor}: ThemedToken): TextStyle  {
   const isBold = fontStyle === 2;
   const isUnderline = fontStyle === 4;
   const isStrikethrough = fontStyle === 8;
+  const {fontFamily, fontSize, lineHeight} = typography;
   return {
     color,
     fontFamily,
@@ -67,11 +70,15 @@ function getTokenStyle({color, fontStyle, bgColor}: ThemedToken): TextStyle  {
   }
 }
 
-const fontFamily = Platform.select({
-  web: 'Fira Code',
-  ios: 'Menlo',
-  android: 'monospace',
-});
+const typography = {
+  lineHeight: 20,
+  fontSize: 14,
+  fontFamily: Platform.select({
+    web: 'Fira Code',
+    ios: 'Menlo',
+    android: 'monospace',
+  }),
+};
 
 const styles = StyleSheet.create({
   root: {
