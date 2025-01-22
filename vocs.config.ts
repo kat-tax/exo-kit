@@ -297,6 +297,9 @@ export default defineConfig({
         'react-native': 'react-native-web',
       },
     },
+    define: {
+      __DEV__: false,
+    },
   },
   rootDir: './docs',
 });

@@ -30,6 +30,8 @@ export default defineConfig(env => mergeConfig(
           'react-native-web',
           'react-native-unistyles',
           'react/jsx-runtime',
+          /* Vendor */
+          '@legendapp/list',
         ],
       },
     },

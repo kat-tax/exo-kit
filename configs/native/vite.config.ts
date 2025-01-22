@@ -26,8 +26,9 @@ export default defineConfig(env => mergeConfig(
           'react-native',
           'react-native-unistyles',
           'react/jsx-runtime',
-          /** Vendor */
+          /* Vendor */
           '@candlefinance/faster-image',
+          '@legendapp/list',
           '@react-native-community/checkbox',
           '@react-native-community/netinfo',
           '@react-native-community/slider',
