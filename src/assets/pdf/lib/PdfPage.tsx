@@ -2,18 +2,18 @@ import {useState, useEffect} from 'react';
 import {usePdf} from './PdfContext';
 
 interface PdfPageProps {
-  page: number,
+  item: number,
+  height: number,
 }
 
 export function PdfPage(props: PdfPageProps) {
   const [dataUri, setDataUri] = useState<string>();
-  const {renderPage, pageSize} = usePdf();
-  const [_width, height] = pageSize;
-  const {page} = props;
+  const {renderPage} = usePdf();
+  const {item, height} = props;
 
   useEffect(() => {
     let url: string;
-    renderPage(page).then(png => {
+    renderPage(item).then(png => {
       if (!png) return;
       url = URL.createObjectURL(new Blob([png], {type: 'image/png'}));
       setDataUri(url);
@@ -23,9 +23,9 @@ export function PdfPage(props: PdfPageProps) {
         URL.revokeObjectURL(url);
       }
     }
-  }, [renderPage, page]);
+  }, [item, renderPage]);
 
   return dataUri
-    ? <img src={dataUri} alt={`Page ${page}`}/>
+    ? <img src={dataUri} alt={`Page ${item}`}/>
     : <div style={{width: '100%', height: `${height}px`}}/>
 }

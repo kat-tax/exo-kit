@@ -6,7 +6,7 @@ import type {PdfComponent, PdfProps, PdfRef} from './Pdf.interface';
 
 /** A component that displays a PDF */
 export const Pdf: PdfComponent = memo(forwardRef((
-  {src, ...props}: PdfProps,
+  {src, onPageChange, ...props}: PdfProps,
   ref: React.Ref<PdfRef>,
 ) => {
 
@@ -24,12 +24,8 @@ export const Pdf: PdfComponent = memo(forwardRef((
   //useEffect(() => props.onPageChange?.(...pages), [pages, props.onPageChange]);
 
   return (
-    <PdfProvider data={src}>
-      <PdfScroll
-        {...props}
-        {...{src}}
-        //onPageChange={(...args) => setPages(args)}
-      />
+    <PdfProvider {...{src, onPageChange}}>
+      <PdfScroll {...props}/>
     </PdfProvider>
   );
 }), (prev, next) => prev.src === next.src);

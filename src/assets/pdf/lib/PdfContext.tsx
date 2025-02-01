@@ -2,25 +2,23 @@ import {createContext, useContext, useEffect, useState} from 'react';
 import {useMupdf} from './mupdf.hook';
 
 interface PdfProps {
-  data: string | ArrayBuffer | Uint8Array;
+  src: string | ArrayBuffer | Uint8Array;
   children: React.ReactNode;
-  initPageSize?: [number, number];
+  onPageChange?: (page: number, totalPages: number) => void;
 }
 
 interface PdfContext {
   renderPage: (index: number) => Promise<Uint8Array | undefined>;
-  setPageSize: ([width, height]: [number, number]) => void;
+  setCurrentPage: (index: number) => void;
   currentPage: number;
   pageCount: number;
-  pageSize: [number, number];
 }
 
 const PdfContext = createContext<PdfContext>({
   renderPage: () => Promise.resolve(undefined),
-  setPageSize: () => {},
+  setCurrentPage: () => {},
   currentPage: 0,
   pageCount: 0,
-  pageSize: [0, 0],
 });
 
 export function usePdf() {
@@ -31,44 +29,44 @@ export function usePdf() {
   return context;
 }
 
-export function PdfProvider({data, children, initPageSize}: PdfProps) {
+export function PdfProvider({src, children, onPageChange}: PdfProps) {
   const {started, loadDocument, getPageCount, renderPage} = useMupdf();
   const [currentPage, setCurrentPage] = useState(0);
   const [pageCount, setPageCount] = useState(0);
-  const [pageSize, setPageSize] = useState<[number, number]>(initPageSize ?? [492, 682]);
 
-  // Load document on data change
+  // Load document on src change
   useEffect(() => {
-    if (!data || !started) return;
+    if (!src || !started) return;
     (async () => {
       setPageCount(0);
       setCurrentPage(0);
-      let src: ArrayBuffer;
-      if (typeof data === 'string') {
-        const res = await fetch(data);
-        src = await res.arrayBuffer();
-      } else if (data instanceof Uint8Array) {
-        src = data.buffer as ArrayBuffer;
-      } else if (data instanceof ArrayBuffer) {
-        src = data;
+      let buffer: ArrayBuffer;
+      if (typeof src === 'string') {
+        const res = await fetch(src);
+        buffer = await res.arrayBuffer();
+      } else if (src instanceof Uint8Array) {
+        buffer = src.buffer as ArrayBuffer;
+      } else if (src instanceof ArrayBuffer) {
+        buffer = src;
       } else {
-        throw new Error('Invalid data type');
+        throw new Error('Invalid src type');
       }
-      await loadDocument(src);
+      await loadDocument(buffer);
       setPageCount(await getPageCount());
     })();
-    return () => {
-      console.log('>> pdf [web] unloading document');
-    }
-  }, [data, started]);
+  }, [src, started]);
+
+  // Fire onPageChange on pages change
+  useEffect(() => {
+    onPageChange?.(currentPage, pageCount);
+  }, [currentPage, pageCount, onPageChange]);
 
   return (
     <PdfContext.Provider value={{
       renderPage,
-      setPageSize,
+      setCurrentPage,
       currentPage,
       pageCount,
-      pageSize,
     }}>
       {children}
     </PdfContext.Provider>
