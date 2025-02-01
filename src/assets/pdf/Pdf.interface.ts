@@ -4,14 +4,14 @@ import type {DimensionValue} from 'react-native';
 export type PdfComponent = React.ForwardRefExoticComponent<PdfProps>
 
 export interface PdfProps extends Omit<PdfRendererViewPropsType, 'source'> {
-  /** The PDF document as a URL or ArrayBuffer */
-  src: string | ArrayBuffer,
+  /** The source of the PDF document */
+  src: string | ArrayBuffer | Uint8Array,
   /** The width of the PDF document */
   width?: DimensionValue,
   /** The height of the PDF document */
   height?: DimensionValue,
-  /** The component to render in place of a loading page */
-  placeholderPage?: React.ReactNode,
+  /** The component to render in place of a loading page (web only) */
+  placeholder?: React.ReactNode,
 }
 
 export interface PdfRef {

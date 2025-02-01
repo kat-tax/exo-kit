@@ -1,39 +1,44 @@
-import {ScrollView} from 'react-native';
+import {useMemo, useState} from 'react';
+import {LegendList} from '@legendapp/list';
+import {View} from 'react-native';
 import {PdfPage} from './PdfPage';
+import {usePdf} from './PdfContext';
 
-import type {ScrollViewProps} from 'react-native';
 import type {PdfProps} from '../Pdf.interface';
-import type {useMupdf} from './useMupdf';
 
-interface PdfScrollerProps extends PdfProps {
-  pdf: ReturnType<typeof useMupdf>,
-  onScroll: ScrollViewProps['onScroll'],
-}
+export function PdfScroller(props: PdfProps) {
+  const {pageCount} = usePdf();
+  const [height, setHeight] = useState(typeof props.height === 'number' ? props.height : 555);
+  const list = useMemo(() => Array.from({length: pageCount}, (_, i) => i), [pageCount]);
 
-export function PdfScroller({pdf, onScroll, ...props}: PdfScrollerProps) {
   return (
-    <ScrollView
-      onScroll={onScroll}
-      scrollEventThrottle={1000}
+    <LegendList
+      data={list}
+      keyExtractor={i => i.toString()}
+      drawDistance={height * 2}
+      estimatedItemSize={height}
+      contentContainerStyle={props.style}
       style={{
         width: props.width ?? '100%',
         height: props.height ?? '100%',
       }}
-      contentContainerStyle={[
-        {
-          gap: (props.distanceBetweenPages ?? 16) * (72 / 96),
-        },
-        props.style,
-      ]}>
-      {Array.from({length: pdf.pageCount}, (_, i) => (
+      onItemSizeChanged={(info) => {
+        console.log('>> pdf [web] onItemSizeChanged', info);
+        setHeight(info.size);
+      }}
+      ItemSeparatorComponent={() =>
+        <View style={{height: (props.distanceBetweenPages ?? 16) * (72 / 96)}}/>
+      }
+      renderItem={({item}) => (
         <PdfPage
-          key={i.toString()}
-          index={i}
-          render={pdf.renderPage}
+          page={item}
           width={props.width}
           height={props.height}
         />
-      ))}
-    </ScrollView>
+      )}
+      onViewableItemsChanged={({viewableItems}) => {
+        console.log('>> pdf [web] viewableItems', viewableItems);
+      }}
+    />
   );
 }

@@ -2,56 +2,62 @@
 
 import * as Comlink from 'comlink';
 import * as mupdfjs from 'mupdf/mupdfjs';
-import type * as MuPDF from 'mupdf/mupdfjs';
-
-export const MUPDF_LOADED = 'MUPDF_LOADED';
+import type {PDFDocument} from 'mupdf/mupdfjs';
 
 export class MupdfWorker {
-  private mupdf?: typeof MuPDF;
-  private doc?: MuPDF.PDFDocument;
+  private data?: ArrayBuffer;
+  private cache = new Map<number, Uint8Array>();
+  private document?: PDFDocument;
 
   constructor() {
-    this.init();
+    this.initializeMupdf();
   }
 
-  private async init() {
+  private initializeMupdf() {
     try {
-      this.mupdf = mupdfjs;
-      postMessage(MUPDF_LOADED);
-    } catch (err) {
-      console.error('Failed to initialize MuPDF:', err);
+      postMessage('MUPDF_STARTED');
+    } catch (error) {
+      console.error('Failed to initialize MuPDF:', error);
     }
   }
 
-  async load(document: ArrayBuffer): Promise<{pageCount: number}> {
-    if (!this.mupdf)
-      throw new Error('MuPDF not initialized');
-    try {
-      this.doc = this.mupdf.PDFDocument.openDocument(document, 'application/pdf');
-      return {
-        pageCount: this.doc?.countPages() ?? 0,
-      }
-    } catch (err) {
-      console.error('Error loading document:', err);
-      throw new Error('Failed to load document');
+  getPageCount(): number {
+    if (!this.document) throw new Error('Document not loaded');
+    return this.document.countPages();
+  }
+
+  loadDocument(data: ArrayBuffer): boolean {
+    this.data = data;
+    this.document = mupdfjs.PDFDocument.openDocument(data, 'application/pdf');
+    return true;
+  }
+
+  reloadDocument() {
+    if (!this.data) throw new Error('Document data not loaded');
+    if (!this.document) throw new Error('Document not loaded');
+    if (this.document.countPages() === 0) {
+      this.document.destroy();
+      this.document = mupdfjs.PDFDocument.openDocument(this.data, 'application/pdf');
     }
   }
 
-  async renderPage(index = 0, scale = 1): Promise<Uint8Array> {
-    if (!this.mupdf || !this.doc)
-      throw new Error('Document not loaded');
-    try {
-      const page = this.doc.loadPage(index);
-      const pixmap = page.toPixmap(
-        [scale, 0, 0, scale, 0, 0],
-        this.mupdf.ColorSpace.DeviceRGB,
-      );
-      return pixmap.asPNG();
-    } catch (err) {
-      console.error('Error rendering page:', err);
-      throw new Error('Failed to render page');
-    }
+  renderPageAsImage(index = 0, scale = 1): Uint8Array {
+    const cached = this.cache.get(index);
+    if (cached) return cached;
+    if (!this.document) throw new Error('Document not loaded');
+    this.document.abandonOperation();
+    this.reloadDocument(); // Needed to work around a bug in MuPDF
+    const page = this.document.loadPage(index);
+    const pixmap = page.toPixmap(
+      [scale, 0, 0, scale, 0, 0],
+      mupdfjs.ColorSpace.DeviceRGB
+    );
+    const png = pixmap.asPNG();
+    this.cache.set(index, png);
+    pixmap.destroy();
+    page.destroy();
+    return png;
   }
 }
 
-export default Comlink.expose(new MupdfWorker());
+Comlink.expose(new MupdfWorker());

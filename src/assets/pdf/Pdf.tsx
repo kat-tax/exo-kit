@@ -1,55 +1,35 @@
-import {useMupdf} from './lib/useMupdf';
+import {useImperativeHandle, forwardRef, memo} from 'react';
 import {PdfScroller} from './lib/PdfScroller';
-import {useImperativeHandle, useState, useCallback, useEffect, forwardRef, memo} from 'react';
+import {PdfProvider} from './lib/PdfContext';
 
 import type {PdfComponent, PdfProps, PdfRef} from './Pdf.interface';
-import type {NativeSyntheticEvent, NativeScrollEvent} from 'react-native';
 
 /** A component that displays a PDF */
 export const Pdf: PdfComponent = memo(forwardRef((
   {src, ...props}: PdfProps,
   ref: React.Ref<PdfRef>,
 ) => {
-  const pdf = useMupdf();
-  const [currentPage, setCurrentPage] = useState(0);
 
-  const onScroll = useCallback((event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const scrollTop = event.nativeEvent.contentOffset.y;
-    const pageHeight = event.nativeEvent.layoutMeasurement.height;
-    const pageIndex = Math.round(scrollTop / pageHeight);
-    setCurrentPage(pageIndex);
-    props.onPageChange?.(pageIndex, pdf.pageCount);
-  }, [pdf.pageCount, props.onPageChange]);
-
-  // Control Document
   useImperativeHandle(ref, () => ({
     prevPage: () => {
-      setCurrentPage(Math.max(currentPage - 1, 0));
+      //const [index, total] = pages;
+      //setPages([Math.max(index - 1, 0), total]);
     },
     nextPage: () => {
-      setCurrentPage(Math.min(currentPage + 1, pdf.pageCount - 1));
+      //const [index, total] = pages;
+      //setPages([Math.min(index + 1, total - 1), total]);
     },
   }));
 
-  // Page Change Event
-  useEffect(() => {
-    props.onPageChange?.(0, pdf.pageCount);
-  }, [props.onPageChange, pdf.pageCount]);
-
-  // Load Document
-  useEffect(() => {
-    (async () => {
-      if (typeof src === 'string') {
-        const response = await fetch(src);
-        const buffer = await response.arrayBuffer();
-        await pdf.loadDocument(buffer);
-      } else if (src instanceof ArrayBuffer) {
-        await pdf.loadDocument(src);
-      }
-    })();
-  }, [src, pdf.loadDocument]);
+  //useEffect(() => props.onPageChange?.(...pages), [pages, props.onPageChange]);
 
   return (
-    <PdfScroller {...props} {...{src, pdf, onScroll}}/>
+    <PdfProvider data={src}>
+      <PdfScroller
+        {...props}
+        {...{src}}
+        //onPageChange={(...args) => setPages(args)}
+      />
+    </PdfProvider>
   );
 }), (prev, next) => prev.src === next.src);
