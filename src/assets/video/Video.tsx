@@ -4,7 +4,10 @@ import {useState, useRef, useEffect, useImperativeHandle, forwardRef} from 'reac
 import type {VideoRef as VideoBaseRef} from 'react-native-video';
 import type {VideoComponent, VideoProps, VideoRef} from './Video.interface';
 
-export const Video: VideoComponent = forwardRef(({title, thumbnails, ...props}: VideoProps, ref: React.Ref<VideoRef>) => {
+export const Video: VideoComponent = forwardRef((
+  {title, thumbnails, ...props}: VideoProps,
+  ref: React.Ref<VideoRef>,
+) => {
   const video = useRef<VideoBaseRef>(null);
   const [muted, setMuted] = useState(props.muted);
 

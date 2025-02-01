@@ -1,9 +1,12 @@
 import type {PdfRendererViewPropsType} from 'react-native-pdf-renderer/dist/PdfRendererView';
 import type {DimensionValue} from 'react-native';
 
-export type PdfComponent = React.ForwardRefExoticComponent<PdfProps>
+export type PdfComponent = React.MemoExoticComponent<React.ForwardRefExoticComponent<
+  Omit<PdfProps, "ref"> & React.RefAttributes<PdfRef>
+>>
 
 export interface PdfProps extends Omit<PdfRendererViewPropsType, 'source'> {
+  ref?: React.Ref<PdfRef>,
   /** The source of the PDF document */
   src: string | ArrayBuffer | Uint8Array,
   /** The width of the PDF document */

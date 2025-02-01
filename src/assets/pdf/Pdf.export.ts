@@ -1,2 +1,2 @@
 export {Pdf} from './Pdf';
-export type * from './Pdf.interface';
+export type {PdfComponent, PdfProps, PdfRef} from './Pdf.interface';

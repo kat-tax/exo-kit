@@ -1,9 +1,9 @@
-import {useImperativeHandle, forwardRef} from 'react';
+import {useImperativeHandle, forwardRef, memo} from 'react';
 import PdfRendererView from 'react-native-pdf-renderer';
 
 import type {PdfComponent, PdfProps, PdfRef} from './Pdf.interface';
 
-export const Pdf: PdfComponent = forwardRef((
+export const Pdf: PdfComponent = memo(forwardRef((
   {src, style, ...props}: PdfProps,
   ref: React.Ref<PdfRef>,
 ) => {
@@ -29,4 +29,4 @@ export const Pdf: PdfComponent = forwardRef((
       {...props}
     />
   );
-});
+}));
