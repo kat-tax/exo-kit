@@ -72,7 +72,7 @@ export class MupdfWorker {
         const {index, scale, resolve} = this.renderQueue.shift()!;
         if (!this.document) throw new Error('Document not loaded');
         this.reloadDocument();
-        const page = this.document.loadPage(index);
+        const page = this.document.loadPage(index - 1);
         const pixmap = page.toPixmap(
           [scale, 0, 0, scale, 0, 0],
           mupdfjs.ColorSpace.DeviceRGB

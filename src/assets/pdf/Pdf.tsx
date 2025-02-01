@@ -8,10 +8,14 @@ import type {PdfComponent, PdfProps, PdfRef} from './Pdf.interface';
 export const Pdf: PdfComponent = memo(forwardRef((
   {src, onPageChange, ...props}: PdfProps,
   ref: React.Ref<PdfRef>,
-) => {
-  return (
-    <PdfProvider {...{src, ref, onPageChange}}>
-      <PdfScroll {...props}/>
-    </PdfProvider>
-  );
-}), (prev, next) => prev.src === next.src);
+) => (
+  <PdfProvider {...{src, ref, onPageChange}}>
+    <PdfScroll {...props}/>
+  </PdfProvider>
+)), (prev, next) =>
+  prev.src === next.src
+  && prev.width === next.width
+  && prev.height === next.height
+  && prev.onPageChange === next.onPageChange
+  && prev.distanceBetweenPages === next.distanceBetweenPages
+);
