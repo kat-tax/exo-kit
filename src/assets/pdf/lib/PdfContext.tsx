@@ -4,18 +4,23 @@ import {useMupdf} from './mupdf.hook';
 interface PdfProps {
   data: string | ArrayBuffer | Uint8Array;
   children: React.ReactNode;
+  initPageSize?: [number, number];
 }
 
 interface PdfContext {
   renderPage: (index: number) => Promise<Uint8Array | undefined>;
+  setPageSize: ([width, height]: [number, number]) => void;
   currentPage: number;
   pageCount: number;
+  pageSize: [number, number];
 }
 
 const PdfContext = createContext<PdfContext>({
   renderPage: () => Promise.resolve(undefined),
+  setPageSize: () => {},
   currentPage: 0,
   pageCount: 0,
+  pageSize: [0, 0],
 });
 
 export function usePdf() {
@@ -26,10 +31,11 @@ export function usePdf() {
   return context;
 }
 
-export function PdfProvider({data, children}: PdfProps) {
+export function PdfProvider({data, children, initPageSize}: PdfProps) {
   const {started, loadDocument, getPageCount, renderPage} = useMupdf();
   const [currentPage, setCurrentPage] = useState(0);
   const [pageCount, setPageCount] = useState(0);
+  const [pageSize, setPageSize] = useState<[number, number]>(initPageSize ?? [492, 682]);
 
   // Load document on data change
   useEffect(() => {
@@ -59,8 +65,10 @@ export function PdfProvider({data, children}: PdfProps) {
   return (
     <PdfContext.Provider value={{
       renderPage,
+      setPageSize,
       currentPage,
       pageCount,
+      pageSize,
     }}>
       {children}
     </PdfContext.Provider>

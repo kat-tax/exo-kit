@@ -1,6 +1,6 @@
 import {useImperativeHandle, forwardRef, memo} from 'react';
-import {PdfScroller} from './lib/PdfScroller';
 import {PdfProvider} from './lib/PdfContext';
+import {PdfScroll} from './lib/PdfScroll';
 
 import type {PdfComponent, PdfProps, PdfRef} from './Pdf.interface';
 
@@ -25,7 +25,7 @@ export const Pdf: PdfComponent = memo(forwardRef((
 
   return (
     <PdfProvider data={src}>
-      <PdfScroller
+      <PdfScroll
         {...props}
         {...{src}}
         //onPageChange={(...args) => setPages(args)}

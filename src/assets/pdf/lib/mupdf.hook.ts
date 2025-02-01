@@ -15,7 +15,7 @@ export function useMupdf() {
     const worker = new MWorker();
     muworker.current = Comlink.wrap<MupdfWorker>(worker);
     worker.addEventListener('message', (event: MessageEvent) => {
-      if (event.data === 'MUPDF_STARTED') {
+      if (event.data === 'mupdf::init') {
         setStarted(true);
       }
     });
