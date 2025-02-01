@@ -9,7 +9,7 @@ import type {PdfProps} from '../Pdf.interface';
 export function PdfScroll(props: Omit<PdfProps, 'src' | 'onPageChange'>) {
   const {pageCount, setCurrentPage, listRef} = usePdf();
   const [height, setHeight] = useState(typeof props.height === 'number' ? props.height : 682);
-  const indices = useMemo(() => Array.from({length: pageCount}, (_, i) => i + 1), [pageCount]);
+  const indices = useMemo(() => Array.from({length: pageCount - 1}, (_, i) => i + 1), [pageCount]);
   const gap = (props.distanceBetweenPages ?? 16) * (72 / 96);
   return (
     <LegendList
