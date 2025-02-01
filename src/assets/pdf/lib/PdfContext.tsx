@@ -1,24 +1,30 @@
-import {createContext, useContext, useEffect, useState} from 'react';
+import {useContext, useEffect, useState, useImperativeHandle, useRef, createContext} from 'react';
 import {useMupdf} from './mupdf.hook';
 
-interface PdfProps {
+import type {LegendListRef} from '@legendapp/list';
+import type {PdfRef} from '../Pdf.interface';
+
+interface PdfProviderProps {
   src: string | ArrayBuffer | Uint8Array;
+  ref: React.Ref<PdfRef>;
   children: React.ReactNode;
   onPageChange?: (page: number, totalPages: number) => void;
 }
 
-interface PdfContext {
+interface PdfContextType {
   renderPage: (index: number) => Promise<Uint8Array | undefined>;
   setCurrentPage: (index: number) => void;
   currentPage: number;
   pageCount: number;
+  listRef: React.Ref<LegendListRef>;
 }
 
-const PdfContext = createContext<PdfContext>({
+const PdfContext = createContext<PdfContextType>({
   renderPage: () => Promise.resolve(undefined),
   setCurrentPage: () => {},
   currentPage: 0,
   pageCount: 0,
+  listRef: null,
 });
 
 export function usePdf() {
@@ -29,10 +35,27 @@ export function usePdf() {
   return context;
 }
 
-export function PdfProvider({src, children, onPageChange}: PdfProps) {
+export function PdfProvider({src, ref, children, onPageChange}: PdfProviderProps) {
   const {started, loadDocument, getPageCount, renderPage} = useMupdf();
   const [currentPage, setCurrentPage] = useState(0);
   const [pageCount, setPageCount] = useState(0);
+  const listRef = useRef<LegendListRef>(null);
+
+  // Handle document controls
+  useImperativeHandle(ref, () => ({
+    prevPage: () => {
+      listRef.current?.scrollToIndex({
+        index: Math.max(currentPage - 1, 0),
+        animated: true,
+      });
+    },
+    nextPage: () => {
+      listRef.current?.scrollToIndex({
+        index: Math.min(currentPage + 1, pageCount - 1),
+        animated: true,
+      });
+    },
+  }));
 
   // Load document on src change
   useEffect(() => {
@@ -67,6 +90,7 @@ export function PdfProvider({src, children, onPageChange}: PdfProps) {
       setCurrentPage,
       currentPage,
       pageCount,
+      listRef,
     }}>
       {children}
     </PdfContext.Provider>

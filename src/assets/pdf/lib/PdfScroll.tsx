@@ -6,14 +6,15 @@ import {usePdf} from './PdfContext';
 
 import type {PdfProps} from '../Pdf.interface';
 
-export function PdfScroll(props: Omit<PdfProps, 'src'>) {
-  const {pageCount, setCurrentPage} = usePdf();
+export function PdfScroll(props: Omit<PdfProps, 'src' | 'onPageChange'>) {
+  const {pageCount, setCurrentPage, listRef} = usePdf();
   const [height, setHeight] = useState(typeof props.height === 'number' ? props.height : 682);
   const list = useMemo(() => Array.from({length: pageCount}, (_, i) => i), [pageCount]);
   const gap = (props.distanceBetweenPages ?? 16) * (72 / 96);
 
   return (
     <LegendList
+      ref={listRef}
       data={list}
       extraData={height}
       drawDistance={height * 5}

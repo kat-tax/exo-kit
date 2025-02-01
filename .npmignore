@@ -7,3 +7,4 @@ patches/
 src/
 tsconfig.json
 vocs.config.ts
+vocs.config.ts.timestamp-*
