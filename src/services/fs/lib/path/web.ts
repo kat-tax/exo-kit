@@ -47,6 +47,7 @@ export async function getFileAccess(
 
 export async function getFileHandle(
   path: string,
+  opts?: FileSystemGetFileOptions | FileSystemGetDirectoryOptions,
 ): Promise<FileSystemFileHandle | undefined> {
   const root = await getRoot();
   const steps = [...Path.from(path)];
@@ -57,13 +58,13 @@ export async function getFileHandle(
   while (cwd && name) {
     if (steps.length > 0) {
       try {
-        cwd = await cwd.getDirectoryHandle(name);
+        cwd = await cwd.getDirectoryHandle(name, opts);
       } catch {
         return undefined;
       }
     } else {
       try {
-        return cwd.getFileHandle(name);
+        return cwd.getFileHandle(name, opts);
       } catch {
         return undefined;
       }

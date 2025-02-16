@@ -10,7 +10,7 @@ export default defineConfig({
   socials: [
     {
       icon: 'github',
-      link: 'https://github.com/kat-tax/exo',
+      link: 'https://github.com/kat-tax/exo-kit',
     },
     {
       icon: 'discord',
