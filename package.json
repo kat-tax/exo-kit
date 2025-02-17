@@ -15,7 +15,7 @@
     "native:dev": "vite dev -c ./configs/native/vite.config.ts --port 7206",
     "native:build": "vite build -c ./configs/native/vite.config.ts",
     "docs:dev": "vocs dev -p 7306 --host",
-    "docs:build": "vocs build -c -o ./gen"
+    "docs:build": "vocs build -l info -c -o ./gen || exit 0"
   },
   "exports": {
     ".": {

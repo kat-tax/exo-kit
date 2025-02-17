@@ -1,4 +1,4 @@
-import {useState, useLayoutEffect} from 'react';
+import {useState, useEffect} from 'react';
 
 export interface ThemeProps {
   children: (theme: string) => void,
@@ -11,7 +11,7 @@ export function Theme(props: ThemeProps) {
       : 'light'
     : 'light');
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const pickerButton = document.querySelector('button:has(.vocs_utils_visibleDark)');
     const updateTheme = () => {
