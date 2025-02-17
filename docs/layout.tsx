@@ -1,3 +1,6 @@
+// @ts-ignore
+globalThis.global = {};
+
 // Temp: workaround for vocs
 if (typeof navigator === 'undefined') {
   console.log('navigator is undefined');

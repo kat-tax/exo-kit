@@ -1,5 +1,8 @@
-import cssToReactNative from 'css-to-react-native';
-import type {Style, StyleTuple} from 'css-to-react-native';
+export type StyleTuple = [string, string]
+
+export interface Style {
+  [key: string]: string | number | Style
+}
 
 export const textStyles = [
   'color',
@@ -31,18 +34,19 @@ export function removeTextStyleProps(style: Style): Style {
   return obj;
 }
 
-export function convertInlineStyles(style: string): Style {
-  const rules = style.split(';');
-  const tuples = rules
-    .map((rule) => {
-      let [key, value] = rule.split(':');
-      if (key && value) {
-        key = key.trim();
-        value = value.trim();
-        return [key, value] as StyleTuple;
-      }
-      return null;
-    })
-    .filter((x) => x !== null);
-  return cssToReactNative(tuples);
+export function convertInlineStyles(_style: string): Style {
+  // const rules = style.split(';');
+  // const tuples = rules
+  //   .map((rule) => {
+  //     let [key, value] = rule.split(':');
+  //     if (key && value) {
+  //       key = key.trim();
+  //       value = value.trim();
+  //       return [key, value] as StyleTuple;
+  //     }
+  //     return null;
+  //   })
+  //   .filter((x) => x !== null);
+  // return cssToReactNative(tuples);
+  return {};
 }

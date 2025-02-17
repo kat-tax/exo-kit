@@ -38,8 +38,6 @@ export default defineConfig(env => mergeConfig(
           'react-native-linear-gradient',
           'react-native-mmkv',
           'react-native-readium',
-          'react-native-reanimated',
-          'react-native-screens',
           'react-native-skottie',
           'react-native-svg',
           'react-native-video',

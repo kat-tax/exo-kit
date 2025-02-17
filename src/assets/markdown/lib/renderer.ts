@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {getUniqueID} from './modules/utils';
-import {textStyles, convertInlineStyles} from './modules/styles';
+import {textStyles} from './modules/styles';
 
 import type {ReactNode} from 'react';
 import type {StyleProp, TextStyle, ViewStyle, ImageStyle} from 'react-native';
@@ -83,7 +83,8 @@ export default class AstRenderer {
 
         const attributes = parents[a]?.attributes;
         if (attributes?.style && typeof attributes.style === 'string') {
-          refStyle = convertInlineStyles(attributes.style);
+          console.warn('Warning, inline styles not supported by markdown renderer', attributes.style);
+          // refStyle = convertInlineStyles(attributes.style);
         }
 
         // Combine in specific styles for the object

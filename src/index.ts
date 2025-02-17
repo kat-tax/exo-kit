@@ -26,7 +26,6 @@ export type * from './services/fs/Fs.export';
 export type * from './services/kv/Kv.export';
 export type * from './services/redux/Redux.export';
 export type * from './services/toast/Toast.export';
-export type * from './services/torrent/Torrent.export';
 
 // Widgets
 export type * from './widgets/checkbox/Checkbox.export';
