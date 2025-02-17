@@ -1,3 +1,4 @@
+import {SOURCE_MAPS} from '../../config';
 import {defineConfig, mergeConfig} from 'vite';
 import baseConfig from '../base/vite.config';
 import types from 'vite-plugin-dts';
@@ -8,7 +9,7 @@ export default defineConfig(env => mergeConfig(
     build: {
       outDir: './lib/native',
       minify: false,
-      sourcemap: false,
+      sourcemap: SOURCE_MAPS,
       rollupOptions: {
         output: {
           entryFileNames: (info) => info.name.includes('babel-plugin-')

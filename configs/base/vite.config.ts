@@ -1,11 +1,21 @@
+import {SOURCE_MAPS} from '../../config';
 import {defineConfig} from 'vite';
 import paths from 'vite-tsconfig-paths';
 import react from '@vitejs/plugin-react-swc';
+import sonda from 'sonda/vite';
+
 
 export default (platform: 'web' | 'native') => defineConfig(env => ({
   plugins: [
     paths(),
     react(),
+    sonda({
+      enabled: SOURCE_MAPS,
+      detailed: true,
+      sources: true,
+      open: false,
+      filename: 'bundle.inspect.html',
+    }),
   ],
   define: {
     __DEV__: JSON.stringify(env.mode === 'development'),

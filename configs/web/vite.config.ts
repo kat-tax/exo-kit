@@ -1,3 +1,4 @@
+import {SOURCE_MAPS} from '../../config';
 import {defineConfig, mergeConfig} from 'vite';
 import baseConfig from '../base/vite.config.js';
 
@@ -11,7 +12,7 @@ export default defineConfig(env => mergeConfig(
       outDir: './lib/web',
       cssMinify: 'lightningcss',
       cssCodeSplit: true,
-      sourcemap: false,
+      sourcemap: SOURCE_MAPS,
       target: [
         'esnext',
         'safari15',

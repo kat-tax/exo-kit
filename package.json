@@ -399,6 +399,7 @@
     "react-native-web": "^0.19.13",
     "rive-react-native": "^8.3.0",
     "shiki": "^1.24.4",
+    "sonda": "latest",
     "typescript": "^5.7.2",
     "vite": "^5.4.11",
     "vite-plugin-dts": "^4.4.0",
