@@ -77,6 +77,11 @@ export default (platform: 'web' | 'native') => defineConfig(env => ({
         switch: 'src/widgets/switch/Switch.export',
         // Utils
         utils: 'src/utilities/index.ts',
+        // Babel
+        ...(platform === 'native' ? {
+          'babel-plugin-iconify-extract': 'src/assets/icon/babel-plugin/extract.ts',
+          'babel-plugin-iconify-transform': 'src/assets/icon/babel-plugin/transform.ts',
+        } : {}),
       },
     },
   },
