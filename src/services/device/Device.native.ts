@@ -26,11 +26,11 @@ export class DeviceService implements DeviceBase {
   getLocale(): string {
     switch (Platform.OS) {
       case 'ios':
-        return ((NativeModules.SettingsManager.settings.AppleLocale
-          || NativeModules.SettingsManager.settings.AppleLanguages[0])
+        return ((NativeModules.SettingsManager?.settings?.AppleLocale
+          || NativeModules.SettingsManager?.settings?.AppleLanguages?.[0])
           ?.split('-')?.shift()) || 'en';
       case 'android':
-        return (NativeModules.I18nManager.localeIdentifier
+        return (NativeModules.I18nManager?.localeIdentifier
           ?.split('_')?.shift()) || 'en';
       default:
         return 'en';
