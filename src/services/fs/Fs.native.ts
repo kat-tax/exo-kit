@@ -1,9 +1,9 @@
-import {hfs} from './lib/plugins/NativeHfs';
-// import ipfs from './lib/plugins/IpfsHfs';
+import {hfs} from './lib/core/plugins/NativeHfs';
+// import ipfs from './lib/core/plugins/IpfsHfs';
 import {FileSystem} from 'react-native-file-access';
 import {isText} from './lib/data';
 
-import type {FSBase, FileSystemIn, HfsType} from './Fs.interface';
+import type {FSBase, FileSystemIn, HfsType, PickFilesOptions, PickDirectoryOptions} from './Fs.interface';
 
 export class FSService implements FSBase {
   async init(type?: HfsType) {
@@ -14,30 +14,17 @@ export class FSService implements FSBase {
     return () => {};
   }
 
-  async getDiskSpace() {
-    const disk = await FileSystem.df();
-    const total = disk.internal_total + (disk.external_total || 0);
-    const free = disk.internal_free + (disk.external_free || 0);
-    return {total, free, used: total - free};
+  async pick(_options?: PickFilesOptions) {
+    // TODO: https://github.com/react-native-documents/document-picker
+    return [];
   }
 
-  async openFile() {
-    return null;
+  async pickDirectory(_options?: PickDirectoryOptions) {
+    // TODO: https://github.com/react-native-documents/document-picker
+    return [];
   }
 
-  async openDirectory() {
-    return null;
-  }
-
-  async importFile(fileHandle: FileSystemFileHandle) {
-    return fileHandle;
-  }
-
-  async importDirectory(dirHandle: FileSystemDirectoryHandle) {
-    return dirHandle;
-  }
-
-  async hashFile(
+  async hash(
     input: FileSystemIn,
     _progress?: (bytes: number, total: number) => void,
     _jobId?: number,
@@ -56,5 +43,16 @@ export class FSService implements FSBase {
 
   async isTextFile(name: string, buffer?: ArrayBuffer) {
     return isText(name, buffer);
+  }
+
+  async importFiles(_path: string, _files: Array<File>) {
+    // No-op on native
+  }
+
+  async getDiskSpace() {
+    const disk = await FileSystem.df();
+    const total = disk.internal_total + (disk.external_total || 0);
+    const free = disk.internal_free + (disk.external_free || 0);
+    return {total, free, used: total - free};
   }
 }

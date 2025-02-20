@@ -1,6 +1,5 @@
 import binaryExtensions from './binary';
 import textExtensions from './text';
-import {basename} from '../path/common';
 
 export interface EncodingOpts {
   /** Defaults to 24 */
@@ -24,7 +23,7 @@ export function isText(
   // Test extensions
   if (filename) {
     // Extract filename
-    const parts = basename(filename).split('.').reverse();
+    const parts = filename.split('/').pop()?.split('.').reverse() ?? [];
 
     // Cycle extensions
     for (const extension of parts) {
@@ -139,10 +138,6 @@ export function getEncoding(
   // Return
   return textEncoding;
 }
-
-// ====================================
-// The functions below are created to handle multibyte utf8 characters.
-// To understand how the encoding works, check this article: https://en.wikipedia.org/wiki/UTF-8#Encoding
 
 function getChunkBegin(bytes: Uint8Array, chunkBegin: number) {
   // If it's the beginning, just return.

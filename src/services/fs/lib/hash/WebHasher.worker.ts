@@ -1,7 +1,7 @@
 /// <reference lib="webworker"/>
 
 import {Sha256} from './sha256';
-import {getFileAccess, getFileBuffer} from '../path/web';
+import * as web from '../utils/web';
 import type {FileSystemIn} from '../../Fs.interface';
 
 // @ts-ignore
@@ -18,7 +18,7 @@ const INCREMENTAL_THRESHOLD = Math.max(
 );
 
 self.onmessage = async (e: MessageEvent<FileSystemIn>) => {
-  const [file, total] = await getFileAccess(e.data, true);
+  const [file, total] = await web.getFileAccess(e.data, true);
 
   // Not big enough to incremental hash
   if (total <= INCREMENTAL_THRESHOLD) {
@@ -42,7 +42,7 @@ self.onmessage = async (e: MessageEvent<FileSystemIn>) => {
 
 async function hashSimple(file: File | FileSystemSyncAccessHandle) {
   // Read entire file into buffer
-  const buffer = await getFileBuffer(file);
+  const buffer = await web.getFileBuffer(file);
   // Use Crypto Subtle if available
   try {
     const digest = await crypto.subtle.digest('SHA-256', buffer);

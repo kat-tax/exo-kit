@@ -1,4 +1,4 @@
-/** List of definitive binary file extensions */
+/** List of definitive (non-exhaustive) binary file extensions */
 
 export default [
   'dds',

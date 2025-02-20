@@ -1,15 +1,19 @@
 import {FSService} from './Fs';
 
 export type * from './Fs.interface';
-export * as web from './lib/path/web';
+export * as web from './lib/utils/web';
 
 export const FS = new FSService();
-export const getDiskSpace = FS.getDiskSpace;
 
-export const openFile = FS.openFile;
-export const importFile = FS.importFile;
+export const init = FS.init;
+export const watch = FS.watch;
 
-export const hashFile = FS.hashFile;
+export const pick = FS.pick;
+export const pickDirectory = FS.pickDirectory;
+
+export const hash = FS.hash;
 export const cancelHash = FS.cancelHash;
 
 export const isTextFile = FS.isTextFile;
+export const importFiles = FS.importFiles;
+export const getDiskSpace = FS.getDiskSpace;

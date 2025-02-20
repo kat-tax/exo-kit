@@ -1,5 +1,8 @@
 {
   "material-icon-theme.folders.associations": {
+    "hash": "job",
+    "data": "dump",
+    "utils": "include",
     "native": "target",
     "assets/map": "global",
     "assets/model": "unity",

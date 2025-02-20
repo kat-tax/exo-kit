@@ -1,10 +1,11 @@
-// import ipfs from './lib/plugins/IpfsHfs';
-import {hfs} from './lib/plugins/WebHfs';
+// import ipfs from './lib/core/plugins/IpfsHfs';
+import {hfs} from './lib/core/plugins/WebHfs';
 import Hasher from './lib/hash/WebHasher';
 import {isText} from './lib/data';
+import * as web from './lib/utils/web';
 
 import type {HfsImpl} from './lib/core/types';
-import type {FSBase, FileSystemIn, HfsType, OpenFileOptions, OpenDirectoryOptions} from './Fs.interface';
+import type {FSBase, FileSystemIn, HfsType, PickFilesOptions, PickDirectoryOptions} from './Fs.interface';
 
 export class FSService implements FSBase {
   async init(type?: HfsType): Promise<HfsImpl> {
@@ -29,48 +30,16 @@ export class FSService implements FSBase {
     }
   }
 
-  async getDiskSpace() {
-    const {quota, usage} = await navigator.storage.estimate();
-    const total = quota || 0;
-    const used = usage || 0;
-    return {total, used, free: total - used};
+  async pick(options?: PickFilesOptions) {
+    return web.pickFiles(options);
   }
 
-  async openFile(options?: OpenFileOptions) {
-    // @ts-expect-error https://developer.mozilla.org/en-US/docs/Web/API/Window/showOpenFilePicker
-    const [file]: FileSystemFileHandle[] = await window.showOpenFilePicker(options);
-    return file;
+  async pickDirectory(options?: PickDirectoryOptions) {
+    return web.pickDirectory(options);
   }
 
-  async openDirectory(options?: OpenDirectoryOptions) {
-    // @ts-expect-error https://developer.mozilla.org/en-US/docs/Web/API/Window/showDirectoryPicker
-    const [folder]: FileSystemDirectoryHandle[] = await window.showDirectoryPicker(options);
-    return folder;
-  }
-
-  async importFile(fileHandle: FileSystemFileHandle) {
-    const folder = await navigator.storage.getDirectory();
-    const target = await folder.getFileHandle(fileHandle.name, {create: true});
-    const stream = await target.createWritable();
-    const source = await fileHandle.getFile();
-    await source.stream().pipeTo(stream);
-    return target;
-  }
-
-  async importDirectory(_dirHandle: FileSystemDirectoryHandle, importPath: string) {
-    const root = await navigator.storage.getDirectory();
-    const target = await root.getDirectoryHandle(importPath, {create: true});
-    return target;
-  }
-
-  async hashFile(
-    input: FileSystemIn,
-    progress?: (bytes: number, total: number) => void,
-    jobId?: number,
-  ) {
-    const sha256 = await Hasher.start(input, progress, jobId);
-    const cidPrefix = '1220'; // CID prefix for sha256
-    return `${cidPrefix}${sha256}`;
+  async hash(input: FileSystemIn, progress?: (bytes: number, total: number) => void, jobId?: number) {
+    return await Hasher.start(input, progress, jobId);
   }
 
   async cancelHash(jobId: number) {
@@ -79,5 +48,28 @@ export class FSService implements FSBase {
 
   async isTextFile(name: string, buffer?: ArrayBuffer) {
     return isText(name, buffer);
+  }
+
+  async importFiles(path: string, files: Array<File>) {
+    for (const file of files) {
+      const rel = file.webkitRelativePath?.split('/')?.slice(0, -1)?.join('/');
+      const dest = rel ? `${path}/${rel}` : path;
+      const parent = dest
+        ? await web.getDirectoryHandle(dest, {create: true})
+        : await web.getRoot();
+      if (!parent) continue;
+      const target = await parent.getFileHandle(file.name, {create: true});
+      if (!target) continue;
+      const stream = await target.createWritable();
+      if (!stream) continue;
+      await file.stream().pipeTo(stream);
+    }
+  }
+
+  async getDiskSpace() {
+    const {quota, usage} = await navigator.storage.estimate();
+    const total = quota || 0;
+    const used = usage || 0;
+    return {total, used, free: total - used};
   }
 }

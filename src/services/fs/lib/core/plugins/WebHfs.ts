@@ -1,5 +1,5 @@
-import {Hfs, Path, DirectoryError, NotFoundError, NotEmptyError} from '../core';
-import type {HfsImpl, HfsDirectoryEntry} from '../core/types';
+import {Hfs, Path, DirectoryError, NotFoundError, NotEmptyError} from '..';
+import type {HfsImpl, HfsDirectoryEntry} from '../types';
 
 /**
  * A class representing the Origin Private File System implementation of Hfs.

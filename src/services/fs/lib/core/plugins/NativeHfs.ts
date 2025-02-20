@@ -3,10 +3,10 @@
 // https://github.com/mrousavy/react-native-blob-jsi-helper
 // https://github.com/craftzdog/react-native-quick-base64
 
-import {Hfs} from '../core';
+import {Hfs} from '..';
 import {Retrier} from '@humanwhocodes/retry';
 import {FileSystem, Util} from 'react-native-file-access';
-import type {HfsImpl, HfsDirectoryEntry} from '../core/types';
+import type {HfsImpl, HfsDirectoryEntry} from '../types';
 
 const RETRY_ERROR_CODES = new Set(['ENFILE', 'EMFILE']);
 type FSError = {code: string};
