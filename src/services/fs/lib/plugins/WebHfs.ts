@@ -178,7 +178,10 @@ export class WebHfsImpl implements HfsImpl {
     }
 
     // Hack to read metadata in Chromium
-    const wroot = await getWebkitRoot();
+    let wroot: unknown;
+    try {
+      wroot = await getWebkitRoot();
+    } catch (e) {}
 
     // @ts-ignore -- TS doesn't know about this yet
     for await (const entry of handle.values()) {
@@ -188,12 +191,10 @@ export class WebHfsImpl implements HfsImpl {
       let metadata: FileSystemEntryMetadata | undefined;
       try {
         metadata = await readMetadata(wroot, `${dirPath}/${entry.name}`, isFile);
-      } catch (e) {
-        console.warn(`>> [fs:web] failed to read metadata for "${dirPath}/${entry.name}":`, e);
-      }
+      } catch (e) {}
       yield {
         name: entry.name,
-        size: metadata?.size ?? 0,
+        size: metadata?.size ?? -1,
         lastModified: metadata?.modificationTime ?? new Date(),
         isFile,
         isSymlink,
