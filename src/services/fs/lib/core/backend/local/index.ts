@@ -1,5 +1,7 @@
-import {Hfs, Path, DirectoryError, NotFoundError, NotEmptyError} from '..';
-import type {HfsImpl, HfsDirectoryEntry} from '../types';
+import {Hfs} from '../../hfs';
+import {Path} from '../../../utils/path';
+import {DirectoryError, NotFoundError, NotEmptyError} from '../../hfs.utils';
+import type {HfsImpl, HfsDirectoryEntry} from '../../hfs.types';
 
 /**
  * A class representing the Origin Private File System implementation of Hfs.
@@ -442,7 +444,9 @@ export class WebHfs extends Hfs {
   }
 }
 
-export const hfs = async () => new WebHfs({ root: await navigator.storage.getDirectory() });
+export const mount = async () => new WebHfs({
+  root: await navigator.storage.getDirectory()
+});
 
 /**
  * Finds a file or directory in the OPFS root.

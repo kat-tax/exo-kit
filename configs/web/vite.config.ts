@@ -33,6 +33,8 @@ export default defineConfig(env => mergeConfig(
           'react/jsx-runtime',
           /* Vendor */
           '@legendapp/list',
+          '@zip.js/zip.js',
+          'rmapi-js',
         ],
       },
     },

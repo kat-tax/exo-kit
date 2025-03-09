@@ -1,4 +1,4 @@
-import {Path} from '../core';
+import {Path} from '../utils/path';
 
 import type {
   FileSystemIn,

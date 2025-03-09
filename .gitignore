@@ -6,6 +6,7 @@ gen/
 # Env
 .env*.local
 TODO.md
+GOAL.md
 
 # Typescript
 *.tsbuildinfo

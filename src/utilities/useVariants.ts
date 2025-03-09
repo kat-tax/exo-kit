@@ -1,3 +1,7 @@
+// TODO: we should merge props.root w/ final root returned style
+// automate this: <View ... style={[vstyles.root(), props.style]}>
+
+
 import {useRef, useMemo, useCallback} from 'react';
 import {titleCase} from './common/string';
 

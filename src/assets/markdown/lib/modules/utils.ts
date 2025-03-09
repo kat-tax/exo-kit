@@ -1,10 +1,10 @@
 import {Linking} from 'react-native';
 
-let uuid = new Date().getTime();
+let incId = new Date().getTime();
 
 export function getUniqueID() {
-  uuid++;
-  return `rnmd_${uuid.toString(16)}`;
+  incId++;
+  return `rnmd_${incId.toString(16)}`;
 }
 
 export function openUrl(

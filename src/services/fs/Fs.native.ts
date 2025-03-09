@@ -1,13 +1,22 @@
-import {hfs} from './lib/core/plugins/NativeHfs';
-// import ipfs from './lib/core/plugins/IpfsHfs';
 import {FileSystem} from 'react-native-file-access';
 import {isText} from './lib/data';
 
 import type {FSBase, FileSystemIn, HfsType, PickFilesOptions, PickDirectoryOptions} from './Fs.interface';
+import type {HfsImpl} from './lib/core/hfs.types';
 
 export class FSService implements FSBase {
-  async init(type?: HfsType) {
-    return type === 'ipfs' ? await hfs() : await hfs();
+  async init(backend: HfsType = 'local', token?: string): Promise<HfsImpl> {
+    switch (backend) {
+      case 'local':
+        return (await import('./lib/core/backend/local')).mount();
+      case 'ipfs':
+        return (await import('./lib/core/backend/ipfs')).mount();
+      case 'rmc':
+        return (await import('./lib/core/backend/rmc')).mount(token);
+      default:
+        backend satisfies never;
+    }
+    throw new Error('Invalid backend');
   }
 
   async watch(_path: string, _callback: (records: unknown[]) => void) {

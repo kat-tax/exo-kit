@@ -1,6 +1,6 @@
 {
   "name": "react-exo",
-  "version": "0.18.31",
+  "version": "0.18.37",
   "type": "module",
   "types": "./lib/types/index.d.ts",
   "repository": {
@@ -220,11 +220,13 @@
     "@react-native-community/slider": ">=4",
     "@react-native-picker/picker": ">=2",
     "@rive-app/react-canvas": ">=4",
+    "@zip.js/zip.js": ">=2",
     "burnt": ">=0.12",
     "helia": ">=5",
     "maplibre-gl": "4.7.1",
     "markdown-it": ">=13",
     "mupdf": ">=1",
+    "multiformats": ">=13",
     "react": ">=18",
     "react-dom": ">=18",
     "react-map-gl": ">=7",
@@ -240,6 +242,7 @@
     "react-native-svg": ">=15",
     "react-native-video": ">=6",
     "react-native-web": ">=0.19",
+    "rmapi-js": ">=8",
     "shiki": ">=1.24"
   },
   "peerDependenciesMeta": {
@@ -273,6 +276,9 @@
     "@rive-app/react-canvas": {
       "optional": true
     },
+    "@zip.js/zip.js": {
+      "optional": true
+    },
     "burnt": {
       "optional": true
     },
@@ -283,6 +289,9 @@
       "optional": true
     },
     "markdown-it": {
+      "optional": true
+    },
+    "multiformats": {
       "optional": true
     },
     "mupdf": {
@@ -325,6 +334,9 @@
       "optional": true
     },
     "react-map-gl": {
+      "optional": true
+    },
+    "rmapi-js": {
       "optional": true
     },
     "shiki": {
@@ -370,6 +382,7 @@
     "@types/react": "18.3.18",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react-swc": "^3.7.2",
+    "@zip.js/zip.js": "^2.7.57",
     "burnt": "^0.12.2",
     "concurrently": "^9.1.2",
     "helia": "^5.1.1",
@@ -377,6 +390,7 @@
     "maplibre-gl": "4.7.1",
     "markdown-it": "^13.0.2",
     "million": "^3.1.11",
+    "multiformats": "^13.3.2",
     "mupdf": "^1.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -398,6 +412,7 @@
     "react-native-video": "^6.8.2",
     "react-native-web": "^0.19.13",
     "rive-react-native": "^8.3.0",
+    "rmapi-js": "^8.1.0",
     "shiki": "^1.24.4",
     "sonda": "latest",
     "typescript": "^5.7.2",

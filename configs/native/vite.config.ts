@@ -30,6 +30,7 @@ export default defineConfig(env => mergeConfig(
           /* Vendor */
           '@candlefinance/faster-image',
           '@legendapp/list',
+          '@zip.js/zip.js',
           '@react-native-community/checkbox',
           '@react-native-community/netinfo',
           '@react-native-community/slider',
@@ -42,6 +43,7 @@ export default defineConfig(env => mergeConfig(
           'react-native-skottie',
           'react-native-svg',
           'react-native-video',
+          'rmapi-js',
         ],
       },
     },

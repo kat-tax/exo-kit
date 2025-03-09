@@ -1,12 +1,11 @@
-// TODO: replace with...
-// https://github.com/RonRadtke/react-native-blob-util
-// https://github.com/mrousavy/react-native-blob-jsi-helper
-// https://github.com/craftzdog/react-native-quick-base64
-
-import {Hfs} from '..';
+import {Hfs} from '../../hfs';
 import {Retrier} from '@humanwhocodes/retry';
-import {FileSystem, Util} from 'react-native-file-access';
-import type {HfsImpl, HfsDirectoryEntry} from '../types';
+import {createHelia} from 'helia';
+import {unixfs} from '@helia/unixfs';
+import {CID} from 'multiformats/cid';
+
+import type {HfsImpl, HfsDirectoryEntry} from '../../hfs.types';
+import type {UnixFS} from '@helia/unixfs';
 
 const RETRY_ERROR_CODES = new Set(['ENFILE', 'EMFILE']);
 type FSError = {code: string};
@@ -14,11 +13,11 @@ type FSError = {code: string};
 /**
  * A class representing React Native implementation of Hfs.
  */
-export class NativeHfsImpl implements HfsImpl {
+export class IpfsHfsImpl implements HfsImpl {
   /**
    * The file system module to use.
    */
-  #root: typeof FileSystem;
+  #root: UnixFS;
 
   /**
    * The retryer object used for retrying operations.
@@ -28,7 +27,7 @@ export class NativeHfsImpl implements HfsImpl {
   /**
    * Creates a new instance.
    */
-  constructor({root}: {root: typeof FileSystem}) {
+  constructor({root}: {root: UnixFS}) {
     this.#root = root;
     this.#retrier = new Retrier((error: FSError) =>
       RETRY_ERROR_CODES.has(error.code));
@@ -40,8 +39,9 @@ export class NativeHfsImpl implements HfsImpl {
    * @throws {TypeError} If the file path is not a string.
    */
   async bytes(filePath: string): Promise<Uint8Array | undefined> {
+    const {src} = parse(filePath);
     return this.#retrier
-      .retry(() => this.#root.readFile(filePath))
+      .retry(() => this.#root.cat(src))
       .catch((error: FSError) => {
         if (error.code === 'ENOENT')
           return undefined;
@@ -57,17 +57,21 @@ export class NativeHfsImpl implements HfsImpl {
    */
   async write(filePath: string, contents: Uint8Array | string): Promise<void> {
     const op = () => {
+      let data: Uint8Array;
       if (typeof contents === 'string') {
-        this.#root.writeFile(filePath, contents);
+        const writable = new TextEncoder();
+        const readable = writable.encode(contents);
+        data = readable;
       } else {
-        // TODO: handle Uint8Array
-        // https://github.com/alpha0010/react-native-file-access/issues/78
+        data = contents;
       }
+      this.#root.addBytes(data);
     }
 
+    const {name} = parse(filePath);
     return this.#retrier.retry(op).catch(async (error: FSError) => {
       if (error.code === 'ENOENT')
-        return this.createDirectory(Util.dirname(filePath)).then(op);
+        return this.createDirectory(name).then(op);
       throw error;
     });
   }
@@ -78,18 +82,21 @@ export class NativeHfsImpl implements HfsImpl {
    * @throws {Error} If the file cannot be appended to.
    */
   async append(filePath: string, contents: Uint8Array): Promise<void> {
+    // TODO: implement appending file (delete original, combine old data w/ new)
     const op = () => {
       if (typeof contents === 'string') {
-        this.#root.appendFile(filePath, contents);
+        this.#root.addFile(contents);
       } else {
+        this.#root.addBytes(contents);
         // TODO: handle Uint8Array
         // https://github.com/alpha0010/react-native-file-access/issues/78
       }
     }
 
+    const {name} = parse(filePath);
     return this.#retrier.retry(op).catch(async (error: FSError) => {
       if (error.code === 'ENOENT')
-        return this.createDirectory(Util.dirname(filePath)).then(op);
+        return this.createDirectory(name).then(op);
       throw error;
     });
   }
@@ -99,8 +106,9 @@ export class NativeHfsImpl implements HfsImpl {
    * @throws {Error} If the operation fails with a code other than ENOENT.
    */
   async isFile(filePath: string): Promise<boolean> {
+    const {src} = parse(filePath);
     return this.#root
-      .stat(filePath)
+      .stat(src)
       .then(stat => stat.type === 'file')
       .catch((error: FSError) => {
         if (error.code === 'ENOENT')
@@ -114,8 +122,9 @@ export class NativeHfsImpl implements HfsImpl {
    * @throws {Error} If the operation fails with a code other than ENOENT.
    */
   async isDirectory(dirPath: string): Promise<boolean> {
+    const {src} = parse(dirPath);
     return this.#root
-      .stat(dirPath)
+      .stat(src)
       .then(stat => stat.type === 'directory')
       .catch((error: FSError) => {
         if (error.code === 'ENOENT')
@@ -128,7 +137,8 @@ export class NativeHfsImpl implements HfsImpl {
    * Creates a directory recursively.
    */
   async createDirectory(dirPath: string): Promise<void> {
-    await this.#root.mkdir(dirPath);
+    const {src} = parse(dirPath);
+    await this.#root.mkdir(src, dirPath);
   }
 
   /**
@@ -137,8 +147,9 @@ export class NativeHfsImpl implements HfsImpl {
    * @throws {Error} If the file or directory cannot be deleted.
    */
   async delete(filePath: string): Promise<boolean> {
+    const {src} = parse(filePath);
     return this.#root
-      .unlink(filePath)
+      .rm(src, filePath)
       .then(() => true)
       .catch((error: FSError) => {
         if (error.code === 'ENOENT')
@@ -154,8 +165,9 @@ export class NativeHfsImpl implements HfsImpl {
    * @throws {Error} If the file or directory is not found.
    */
   async deleteAll(filePath: string): Promise<boolean> {
+    const {src} = parse(filePath);  
     return this.#root
-      .unlink(filePath)
+      .rm(src, filePath)
       .then(() => true)
       .catch((error: FSError) => {
         if (error.code === 'ENOENT')
@@ -168,25 +180,30 @@ export class NativeHfsImpl implements HfsImpl {
    * Lists the files and directories in a directory.
    */
   async *list(dirPath: string): AsyncIterable<HfsDirectoryEntry> {
-    const contents = await this.#root.ls(dirPath);
-    // TODO: get stats
-    yield* contents.map(name => ({
-      name,
-      size: 0,
-      lastModified: new Date(),
-      isFile: false,
-      isSymlink: false,
-      isDirectory: false,
-    }));
+    const parsed = parse(dirPath);
+    console.log('*list', parsed);
+    console.log('dirPath', dirPath);
+    for await (const item of this.#root.ls(parsed.src)) {
+      yield {
+        name: item.name,
+        size: item.type === 'file' ? Number(item.size) : 0,
+        lastModified: new Date(),
+        isFile: item.type === 'file',
+        isSymlink: item.type === 'identity',
+        isDirectory: item.type === 'directory',
+      }
+    }
   }
 
   /**
    * Returns the size of a file.
    */
   async size(filePath: string): Promise<number | undefined> {
+    const {src} = parse(filePath);
     return this.#root
-      .stat(filePath)
-      .then(stat => stat.size)
+      .stat(src)
+      // TODO: possibly refactor all types to use bigint
+      .then(stat => Number(stat.fileSize))
       .catch((error: FSError) => {
         if (error.code === 'ENOENT')
           return undefined;
@@ -199,9 +216,10 @@ export class NativeHfsImpl implements HfsImpl {
    * and returns undefined in that case.
    */
   async lastModified(fileOrDirPath: string): Promise<Date | undefined> {
+    const {src} = parse(fileOrDirPath);
     return this.#root
-      .stat(fileOrDirPath)
-      .then(stat => new Date(stat.lastModified))
+      .stat(src)
+      .then(stat => new Date((stat.mtime?.nsecs ?? 0) * 1000))
       .catch((error: FSError) => {
         if (error.code === 'ENOENT')
           return undefined;
@@ -216,7 +234,8 @@ export class NativeHfsImpl implements HfsImpl {
    * @throws {Error} If the destination file is a directory.
    */
   async copy(source: string, destination: string): Promise<void> {
-    return this.#root.cp(source, destination);
+    const {src, dest, name} = parse(source, destination);
+    this.#root.cp(src, dest, name);
   }
 
   /**
@@ -225,7 +244,8 @@ export class NativeHfsImpl implements HfsImpl {
    * @throws {Error} If the destination file or directory is a directory.
    */
   async copyAll(source: string, destination: string): Promise<void> {
-    return this.#root.cp(source, destination);
+    const {src, dest, name} = parse(source, destination);
+    this.#root.cp(src, dest, name);
   }
 
   /**
@@ -234,13 +254,14 @@ export class NativeHfsImpl implements HfsImpl {
    * @throws {Error} If the file cannot be moved.
    */
   async move(source: string, destination: string): Promise<void> {
-    return this.#root.stat(source).then(stat => {
+    const {src, dest, name} = parse(source, destination); 
+    return this.#root.stat(src).then(stat => {
       if (stat.type === 'directory') {
         throw new Error(
           `EISDIR: illegal operation on a directory, move '${source}' -> '${destination}'`,
         );
       }
-      return this.#root.mv(source, destination);
+      this.#root.cp(src, dest, name);
     });
   }
 
@@ -249,20 +270,33 @@ export class NativeHfsImpl implements HfsImpl {
    * @throws {Error} If the source file or directory does not exist.
    */
   async moveAll(source: string, destination: string): Promise<void> {
-    return this.#root.mv(source, destination);
+    const {src, dest, name} = parse(source, destination); 
+    this.#root.cp(src, dest, name);
   }
+}
+
+function parse(src: string, dest?: string) {
+  const parts = new URL(src);
+  const [cid, name] = parts.pathname.split('/') ?? [];
+  return {
+    src: CID.parse(cid),
+    dest: CID.parse(dest || ''),
+    parts,
+    name,
+  };
 }
 
 /**
  * A class representing a file system utility library.
  */
-export class NativeHfs extends Hfs implements HfsImpl {
+export class IpfsHfs extends Hfs implements HfsImpl {
   /** Creates a new instance. */
-  constructor({root}: {root: typeof FileSystem}) {
-    super({impl: new NativeHfsImpl({root})});
+  constructor({root}: {root: UnixFS}) {
+    super({impl: new IpfsHfsImpl({root})});
   }
 }
 
-export const hfs = async () => new NativeHfs({
-  root: FileSystem,
-});
+export const mount = async () => {
+  const helia = await createHelia({});
+  return new IpfsHfs({root: unixfs(helia)});
+}

@@ -6,13 +6,13 @@ settings:
 
 patchedDependencies:
   '@legendapp/list@1.0.0-beta.8':
-    hash: hmdbp6wo6pc3phpobhdfqyhpjm
+    hash: a7f76ddeff72dbd51b40bfd727ab1c5493cd89df24b66ffb8e8754ab650f9981
     path: patches/@legendapp__list@1.0.0-beta.8.patch
   '@legendapp/motion@2.4.0':
-    hash: tienuohcujepzdhs27gccrdtga
+    hash: 1a89f35213a018ae05a9c8182c004a22a082b9f66113be356bdc3d3e1ca067f6
     path: patches/@legendapp__motion@2.4.0.patch
   react-native-readium@2.0.2:
-    hash: ieig7i4lit56hsh3n4q4veggoe
+    hash: 43a0c4db9a6000ba23c5827237801f0612de22be0c84fc1056945296f2d66c90
     path: patches/react-native-readium@2.0.2.patch
 
 importers:
@@ -43,6 +43,9 @@ importers:
       '@reduxjs/toolkit':
         specifier: ^2.5.0
         version: 2.5.0(react-redux@9.2.0(@types/react@18.3.18)(react@18.3.1)(redux@5.0.1))(react@18.3.1)
+      cid:
+        specifier: github:multiformats/cid
+        version: https://codeload.github.com/multiformats/cid/tar.gz/8a65edf231f041a53e6a3c69657e26edbbaaf189
       comlink:
         specifier: ^4.4.2
         version: 4.4.2
@@ -52,6 +55,9 @@ importers:
       idb-keyval:
         specifier: ^6.2.1
         version: 6.2.1
+      multiformats:
+        specifier: ^13.3.2
+        version: 13.3.2
       react-content-loader:
         specifier: ^7.0.2
         version: 7.0.2(react@18.3.1)
@@ -70,6 +76,9 @@ importers:
       redux-persist:
         specifier: ^6.0.0
         version: 6.0.0(react@18.3.1)(redux@5.0.1)
+      rmapi-js:
+        specifier: ^8.1.0
+        version: 8.1.0
       thumbhash:
         specifier: ^0.1.1
         version: 0.1.1
@@ -88,10 +97,10 @@ importers:
         version: 0.4.1
       '@legendapp/list':
         specifier: 1.0.0-beta.8
-        version: 1.0.0-beta.8(patch_hash=hmdbp6wo6pc3phpobhdfqyhpjm)(react-native@0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1))(react@18.3.1)
+        version: 1.0.0-beta.8(patch_hash=a7f76ddeff72dbd51b40bfd727ab1c5493cd89df24b66ffb8e8754ab650f9981)(react-native@0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1))(react@18.3.1)
       '@legendapp/motion':
         specifier: 2.4.0
-        version: 2.4.0(patch_hash=tienuohcujepzdhs27gccrdtga)(nativewind@4.1.23(react-native-reanimated@3.16.6(@babel/core@7.26.0)(react-native@0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1))(react@18.3.1))(react-native-svg@15.11.1(react-native@0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1))(react@18.3.1))(react-native@0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.17))(react-native@0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1))(react@18.3.1)
+        version: 2.4.0(patch_hash=1a89f35213a018ae05a9c8182c004a22a082b9f66113be356bdc3d3e1ca067f6)(nativewind@4.1.23(react-native-reanimated@3.16.6(@babel/core@7.26.0)(react-native@0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1))(react@18.3.1))(react-native-svg@15.11.1(react-native@0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1))(react@18.3.1))(react-native@0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.17))(react-native@0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1))(react@18.3.1)
       '@lottiefiles/dotlottie-react':
         specifier: ^0.12.0
         version: 0.12.1(react@18.3.1)
@@ -128,6 +137,9 @@ importers:
       '@vitejs/plugin-react-swc':
         specifier: ^3.7.2
         version: 3.7.2(vite@5.4.11(@types/node@22.10.5)(lightningcss@1.29.1)(sass@1.83.1)(terser@5.37.0))
+      '@zip.js/zip.js':
+        specifier: ^2.7.57
+        version: 2.7.57
       burnt:
         specifier: ^0.12.2
         version: 0.12.2(expo@52.0.25(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(bufferutil@4.0.9)(react-native@0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react-native@0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1))(react@18.3.1)
@@ -184,7 +196,7 @@ importers:
         version: 1.6.0(react-native@0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1))
       react-native-readium:
         specifier: 2.0.2
-        version: 2.0.2(patch_hash=ieig7i4lit56hsh3n4q4veggoe)(@babel/core@7.26.0)(browserslist@4.24.4)(react-native@0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1))(react@18.3.1)
+        version: 2.0.2(patch_hash=43a0c4db9a6000ba23c5827237801f0612de22be0c84fc1056945296f2d66c90)(@babel/core@7.26.0)(browserslist@4.24.4)(react-native@0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1))(react@18.3.1)
       react-native-responsive-image-view:
         specifier: ^2.2.0
         version: 2.2.0(react-native@0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1))(react@18.3.1)
@@ -3456,6 +3468,10 @@ packages:
     resolution: {integrity: sha512-Su4xcxR0CPGwlDHNmVP09fqET9YxbyDXHaSob6JlBH7L6reTYaeim6zbk9o08UarO0L5GTRo3uzl0D+9lSxmvw==}
     engines: {node: '>=14.6'}
 
+  '@zip.js/zip.js@2.7.57':
+    resolution: {integrity: sha512-BtonQ1/jDnGiMed6OkV6rZYW78gLmLswkHOzyMrMb+CAR7CZO8phOHO6c2qw6qb1g1betN7kwEHhhZk30dv+NA==}
+    engines: {bun: '>=0.7.0', deno: '>=1.0.0', node: '>=16.5.0'}
+
   abort-controller@3.0.0:
     resolution: {integrity: sha512-h8lQ8tacZYnR3vNQTgibj+tODHI5/+l06Au2Pcriv/Gmet0eaj4TwWH41sO9wnHDiQsEj19q0drzdWdeAHtweg==}
     engines: {node: '>=6.5'}
@@ -3991,6 +4007,10 @@ packages:
     resolution: {integrity: sha512-NIxF55hv4nSqQswkAeiOi1r83xy8JldOFDTWiug55KBu9Jnblncd2U6ViHmYgHf01TPZS77NJBhBMKdWj9HQMQ==}
     engines: {node: '>=8'}
 
+  cid@https://codeload.github.com/multiformats/cid/tar.gz/8a65edf231f041a53e6a3c69657e26edbbaaf189:
+    resolution: {tarball: https://codeload.github.com/multiformats/cid/tar.gz/8a65edf231f041a53e6a3c69657e26edbbaaf189}
+    version: 0.0.0
+
   clean-stack@2.2.0:
     resolution: {integrity: sha512-4diC9HaTE+KRAMWhDhrGOECgWZxoevMc5TlkObMqNSsVU62PYzXZ/SMTjzyGAFF1YusgxGcSWTEXBhp0CPwQ1A==}
     engines: {node: '>=6'}
@@ -4155,6 +4175,11 @@ packages:
     peerDependenciesMeta:
       typescript:
         optional: true
+
+  crc-32@1.2.2:
+    resolution: {integrity: sha512-ROmzCKrTnOwybPcJApAA6WBWij23HVfGVNKqqrZpuyZOHqK2CwHSvpGuyt/UNNvaIjEd8X5IFGp4Mh+Ie1IHJQ==}
+    engines: {node: '>=0.8'}
+    hasBin: true
 
   create-vocs@1.0.0-alpha.5:
     resolution: {integrity: sha512-/Nr9taHX1SxL5t72DLFPYujqD8d5PDk0T8bJ9Fb/m7ck1lP20PBxHzF5IYnHI0BeTpIuGk/MQoLfT6JKpY6xnw==}
@@ -5157,6 +5182,9 @@ packages:
     engines: {node: '>=16.x'}
     hasBin: true
 
+  immediate@3.0.6:
+    resolution: {integrity: sha512-XXOFtyqDjNDAQxVfYxuF7g9Il/IbWmmlQg2MYKOH8ExIT1qg6xc4zyS3HaEEATgs1btfzxq15ciUiY7gjSXRGQ==}
+
   immer@10.1.1:
     resolution: {integrity: sha512-s2MPrmjovJcoMaHtx6K11Ra7oD05NT97w1IC5zpMkT6Atjr7H8LjaDd81iIxUYpMKSRRNMJE703M1Fhr/TctHw==}
 
@@ -5436,6 +5464,9 @@ packages:
   isarray@1.0.0:
     resolution: {integrity: sha512-VLghIWNM6ELQzo7zwmcg0NmTVyWKYjvIeM83yjp0wRDTmUnrM678fQbcKBo6n2CJEF0szoG//ytg+TKla89ALQ==}
 
+  isarray@2.0.5:
+    resolution: {integrity: sha512-xHjhDr3cNBK0BzdUJSPXZntQUx/mwMS5Rw4A7lPJ90XGAO6ISP/ePDNuo0vhqOZU+UD5JoodwCAAoZQd3FeAKw==}
+
   isexe@2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
 
@@ -5674,6 +5705,10 @@ packages:
   json-schema@0.4.0:
     resolution: {integrity: sha512-es94M3nTIfsEPisRafak+HDLfHXnKBhV3vU5eqPcS3flIWqcxJWgXHXiey3YrpaNsanY5ei1VoYEbOzijuq9BA==}
 
+  json-stable-stringify@1.2.1:
+    resolution: {integrity: sha512-Lp6HbbBgosLmJbjx0pBLbgvx68FaFU1sdkmBuckmhhJ88kL13OA51CDtR2yJB50eCNMH9wRqtQNNiAqQH4YXnA==}
+    engines: {node: '>= 0.4'}
+
   json-stringify-pretty-compact@3.0.0:
     resolution: {integrity: sha512-Rc2suX5meI0S3bfdZuA7JMFBGkJ875ApfVyq2WHELjBiiG22My/l7/8zPpH/CfFVQHuVLd8NLR0nv6vi0BYYKA==}
 
@@ -5694,9 +5729,18 @@ packages:
   jsonfile@6.1.0:
     resolution: {integrity: sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ==}
 
+  jsonify@0.0.1:
+    resolution: {integrity: sha512-2/Ki0GcmuqSrgFyelQq9M05y7PS0mEwuIzrf3f1fPqkVDVRvZrPZtVSMHxdgo8Aq0sxAOb/cr2aqqA3LeWHVPg==}
+
   jsprim@1.4.2:
     resolution: {integrity: sha512-P2bSOMAc/ciLz6DzgjVlGJP9+BrJWu5UDGK70C2iweC5QBIeFf0ZXRvGjEj2uYgrY2MkAAhsSWHDWlFtEroZWw==}
     engines: {node: '>=0.6.0'}
+
+  jszip@3.10.1:
+    resolution: {integrity: sha512-xXDvecyTpGLrqFrvkrUSoxxfJI5AH7U8zxxtVclpsUtMCq4JQ290LY8AW5c7Ggnr/Y/oK+bQMbqK2qmtk3pN4g==}
+
+  jtd-ts@0.2.1:
+    resolution: {integrity: sha512-pj7Buoh3n0cOqCLp1Ubd02s212i361QnP3xDUTgkVoDZlqjFu/Y+79VOE+F02F8CwIMk2zeQulEFn0dDBWpxTA==}
 
   kdbush@4.0.2:
     resolution: {integrity: sha512-WbCVYJ27Sz8zi9Q7Q0xHC+05iwkm3Znipc2XTlrnJbsHMYktW4hPhXUE8Ys1engBrvffoSCqbil1JQAa7clRpA==}
@@ -5726,6 +5770,9 @@ packages:
 
   libp2p@2.5.0:
     resolution: {integrity: sha512-CXOeybjJ75nAKvHwvPYpe7vJhp4jFv7GALR3oGekno0loplCIGba2v83+c8dBE8oxcWqJOgyDGAXxojURdczMA==}
+
+  lie@3.3.0:
+    resolution: {integrity: sha512-UaiMJzeWRlEujzAuw5LokY1L5ecNQYZKfmyZ9L7wDHb/p5etKaxXhohBcrw0EYby+G/NA52vRSN4N39dxHAIwQ==}
 
   lighthouse-logger@1.4.2:
     resolution: {integrity: sha512-gPWxznF6TKmUHrOQjlVo2UbaL2EJ71mb2CCeRs/2qBpi4L/g4LUVc9+3lKQ6DTUZwJswfM7ainGrLO1+fOqa2g==}
@@ -6379,8 +6426,8 @@ packages:
     resolution: {integrity: sha512-2eznPJP8z2BFLX50tf0LuODrpINqP1RVIm/CObbTcBRITQgmC/TjcREF1NeTBzIcR5XO/ukWo+YHOjBbFwIupg==}
     hasBin: true
 
-  multiformats@13.3.1:
-    resolution: {integrity: sha512-QxowxTNwJ3r5RMctoGA5p13w5RbRT2QDkoM+yFlqfLiioBp78nhDjnRLvmSBI9+KAqN4VdgOVWM9c0CHd86m3g==}
+  multiformats@13.3.2:
+    resolution: {integrity: sha512-qbB0CQDt3QKfiAzZ5ZYjLFOs+zW43vA4uyM8g27PeEuXZybUOFyjrVdP93HPBHMoglibwfkdVwbzfUq8qGcH6g==}
 
   mupdf@1.2.0:
     resolution: {integrity: sha512-POf6Vgs546bcmNoOV80HbFqfw/55J0PcZQQ9vcfMf6FWrmeq1ofc6G+sNAXhQyNeFawcfZJSRLpaUrAw3fZIcA==}
@@ -6537,6 +6584,10 @@ packages:
     resolution: {integrity: sha512-RSn9F68PjH9HqtltsSnqYC1XXoWe9Bju5+213R98cNGttag9q9yAOTzdbsqvIa7aNm5WffBZFpWYr2aWrklWAw==}
     engines: {node: '>= 6'}
 
+  object-keys@1.1.1:
+    resolution: {integrity: sha512-NuAESUOUMrlIXOfHKzD6bpPu3tYt3xvjNdRIQ+FeT0lNb4K8WR70CaDxhuNguS2XG+GjkyMwOzsN5ZktImfhLA==}
+    engines: {node: '>= 0.4'}
+
   observable-webworkers@2.0.1:
     resolution: {integrity: sha512-JI1vB0u3pZjoQKOK1ROWzp0ygxSi7Yb0iR+7UNsw4/Zn4cQ0P3R7XL38zac/Dy2tEA7Lg88/wIJTjF8vYXZ0uw==}
     engines: {node: '>=16.0.0', npm: '>=7.0.0'}
@@ -6679,6 +6730,9 @@ packages:
 
   package-manager-detector@0.2.8:
     resolution: {integrity: sha512-ts9KSdroZisdvKMWVAVCXiKqnqNfXz4+IbrBG8/BWx/TR5le+jfenvoBuIZ6UWM9nz47W7AbD9qYfAwfWMIwzA==}
+
+  pako@1.0.11:
+    resolution: {integrity: sha512-4hLB8Py4zZce5s4yd9XzopqwVv/yGNhV1Bl8NTmCq1763HeK2+EwVTv+leGeL13Dnh2wfbqowVPXCIO0z4taYw==}
 
   parent-module@1.0.1:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
@@ -7553,6 +7607,9 @@ packages:
       react: '*'
       react-native: '*'
 
+  rmapi-js@8.1.0:
+    resolution: {integrity: sha512-zuMg4yaOXyL+iT+sWJO02N+E5plGcUgkSpCr/1ZT05fr4EjVC+JmPeXES4AlV4sfS4hiBSnLd1lxOccJIcn66A==}
+
   rollup@4.30.1:
     resolution: {integrity: sha512-mlJ4glW020fPuLi7DkM/lN97mYEZGWeqBnrljzN0gs7GLctqX3lNWxKQ7Gl712UAX+6fog/L3jh4gb7R6aVi3w==}
     engines: {node: '>=18.0.0', npm: '>=8.0.0'}
@@ -8342,6 +8399,10 @@ packages:
   utils-merge@1.0.1:
     resolution: {integrity: sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==}
     engines: {node: '>= 0.4.0'}
+
+  uuid@11.1.0:
+    resolution: {integrity: sha512-0/A9rDy9P7cJ+8w1c9WD9V//9Wj15Ce2MPz8Ri6032usz+NfePxx5AcN3bN+r6ZL6jEo066/yNYB3tn4pQEx+A==}
+    hasBin: true
 
   uuid@3.4.0:
     resolution: {integrity: sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==}
@@ -10294,7 +10355,7 @@ snapshots:
       it-map: 3.1.1
       it-pipe: 3.0.1
       it-take: 3.0.6
-      multiformats: 13.3.1
+      multiformats: 13.3.2
       p-defer: 4.0.1
       progress-events: 1.0.1
       protons-runtime: 5.5.0
@@ -10315,7 +10376,7 @@ snapshots:
       '@multiformats/multiaddr-to-uri': 11.0.0
       interface-blockstore: 5.3.1
       interface-store: 6.0.2
-      multiformats: 13.3.1
+      multiformats: 13.3.2
       progress-events: 1.0.1
 
   '@helia/delegated-routing-v1-http-api-client@4.2.1':
@@ -10330,7 +10391,7 @@ snapshots:
       it-first: 3.0.6
       it-map: 3.1.1
       it-ndjson: 1.1.1
-      multiformats: 13.3.1
+      multiformats: 13.3.2
       p-defer: 4.0.1
       p-queue: 8.0.1
       uint8arrays: 5.1.0
@@ -10342,7 +10403,7 @@ snapshots:
       interface-blockstore: 5.3.1
       interface-datastore: 8.3.1
       interface-store: 6.0.2
-      multiformats: 13.3.1
+      multiformats: 13.3.2
       progress-events: 1.0.1
 
   '@helia/routers@2.2.0':
@@ -10355,7 +10416,7 @@ snapshots:
       ipns: 10.0.0
       it-first: 3.0.6
       it-map: 3.1.1
-      multiformats: 13.3.1
+      multiformats: 13.3.2
       uint8arrays: 5.1.0
 
   '@helia/unixfs@4.0.1':
@@ -10375,7 +10436,7 @@ snapshots:
       it-last: 3.0.6
       it-pipe: 3.0.1
       merge-options: 3.0.4
-      multiformats: 13.3.1
+      multiformats: 13.3.2
       progress-events: 1.0.1
       sparse-array: 1.3.2
       uint8arrays: 5.1.0
@@ -10404,7 +10465,7 @@ snapshots:
       it-foreach: 2.1.1
       it-merge: 3.0.5
       mortice: 3.0.6
-      multiformats: 13.3.1
+      multiformats: 13.3.2
       p-defer: 4.0.1
       progress-events: 1.0.1
       uint8arrays: 5.1.0
@@ -10438,16 +10499,16 @@ snapshots:
   '@ipld/dag-cbor@9.2.2':
     dependencies:
       cborg: 4.2.7
-      multiformats: 13.3.1
+      multiformats: 13.3.2
 
   '@ipld/dag-json@10.2.3':
     dependencies:
       cborg: 4.2.7
-      multiformats: 13.3.1
+      multiformats: 13.3.2
 
   '@ipld/dag-pb@4.1.3':
     dependencies:
-      multiformats: 13.3.1
+      multiformats: 13.3.2
 
   '@isaacs/cliui@8.0.2':
     dependencies:
@@ -10554,12 +10615,12 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@legendapp/list@1.0.0-beta.8(patch_hash=hmdbp6wo6pc3phpobhdfqyhpjm)(react-native@0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1))(react@18.3.1)':
+  '@legendapp/list@1.0.0-beta.8(patch_hash=a7f76ddeff72dbd51b40bfd727ab1c5493cd89df24b66ffb8e8754ab650f9981)(react-native@0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1))(react@18.3.1)':
     dependencies:
       react: 18.3.1
       react-native: 0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1)
 
-  '@legendapp/motion@2.4.0(patch_hash=tienuohcujepzdhs27gccrdtga)(nativewind@4.1.23(react-native-reanimated@3.16.6(@babel/core@7.26.0)(react-native@0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1))(react@18.3.1))(react-native-svg@15.11.1(react-native@0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1))(react@18.3.1))(react-native@0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.17))(react-native@0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1))(react@18.3.1)':
+  '@legendapp/motion@2.4.0(patch_hash=1a89f35213a018ae05a9c8182c004a22a082b9f66113be356bdc3d3e1ca067f6)(nativewind@4.1.23(react-native-reanimated@3.16.6(@babel/core@7.26.0)(react-native@0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1))(react@18.3.1))(react-native-svg@15.11.1(react-native@0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1))(react@18.3.1))(react-native@0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.17))(react-native@0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@legendapp/tools': 2.0.1(react@18.3.1)
       nativewind: 4.1.23(react-native-reanimated@3.16.6(@babel/core@7.26.0)(react-native@0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1))(react@18.3.1))(react-native-svg@15.11.1(react-native@0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1))(react@18.3.1))(react-native@0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.17)
@@ -10582,7 +10643,7 @@ snapshots:
       '@multiformats/multiaddr': 12.3.4
       any-signal: 4.1.1
       it-protobuf-stream: 1.1.5
-      multiformats: 13.3.1
+      multiformats: 13.3.2
       protons-runtime: 5.5.0
       uint8arraylist: 2.4.8
 
@@ -10608,7 +10669,7 @@ snapshots:
       any-signal: 4.1.1
       it-protobuf-stream: 1.1.5
       it-stream-types: 2.0.2
-      multiformats: 13.3.1
+      multiformats: 13.3.2
       nanoid: 5.0.9
       progress-events: 1.0.1
       protons-runtime: 5.5.0
@@ -10622,7 +10683,7 @@ snapshots:
       '@noble/curves': 1.8.0
       '@noble/hashes': 1.7.0
       asn1js: 3.0.5
-      multiformats: 13.3.1
+      multiformats: 13.3.2
       protons-runtime: 5.5.0
       uint8arraylist: 2.4.8
       uint8arrays: 5.1.0
@@ -10670,7 +10731,7 @@ snapshots:
       '@multiformats/multiaddr': 12.3.4
       it-pushable: 3.2.3
       it-stream-types: 2.0.2
-      multiformats: 13.3.1
+      multiformats: 13.3.2
       progress-events: 1.0.1
       uint8arraylist: 2.4.8
 
@@ -10697,7 +10758,7 @@ snapshots:
       it-protobuf-stream: 1.1.5
       it-take: 3.0.6
       mortice: 3.0.6
-      multiformats: 13.3.1
+      multiformats: 13.3.2
       p-defer: 4.0.1
       p-event: 6.0.1
       progress-events: 1.0.1
@@ -10715,7 +10776,7 @@ snapshots:
       asn1js: 3.0.5
       interface-datastore: 8.3.1
       merge-options: 3.0.4
-      multiformats: 13.3.1
+      multiformats: 13.3.2
       sanitize-filename: 1.6.3
       uint8arrays: 5.1.0
 
@@ -10724,7 +10785,7 @@ snapshots:
       '@libp2p/interface': 2.4.0
       '@multiformats/multiaddr': 12.3.4
       interface-datastore: 8.3.1
-      multiformats: 13.3.1
+      multiformats: 13.3.2
       weald: 1.0.4
 
   '@libp2p/mdns@11.0.17':
@@ -10766,13 +10827,13 @@ snapshots:
       '@libp2p/interface': 2.4.0
       '@libp2p/peer-id': 5.0.10
       '@libp2p/utils': 6.3.1
-      multiformats: 13.3.1
+      multiformats: 13.3.2
 
   '@libp2p/peer-id@5.0.10':
     dependencies:
       '@libp2p/crypto': 5.0.9
       '@libp2p/interface': 2.4.0
-      multiformats: 13.3.1
+      multiformats: 13.3.2
       uint8arrays: 5.1.0
 
   '@libp2p/peer-record@8.0.14':
@@ -10782,7 +10843,7 @@ snapshots:
       '@libp2p/peer-id': 5.0.10
       '@libp2p/utils': 6.3.1
       '@multiformats/multiaddr': 12.3.4
-      multiformats: 13.3.1
+      multiformats: 13.3.2
       protons-runtime: 5.5.0
       uint8-varint: 2.0.4
       uint8arraylist: 2.4.8
@@ -10798,7 +10859,7 @@ snapshots:
       interface-datastore: 8.3.1
       it-all: 3.0.6
       mortice: 3.0.6
-      multiformats: 13.3.1
+      multiformats: 13.3.2
       protons-runtime: 5.5.0
       uint8arraylist: 2.4.8
       uint8arrays: 5.1.0
@@ -10899,7 +10960,7 @@ snapshots:
       it-protobuf-stream: 1.1.5
       it-pushable: 3.2.3
       it-stream-types: 2.0.2
-      multiformats: 13.3.1
+      multiformats: 13.3.2
       node-datachannel: 0.11.0
       p-defer: 4.0.1
       p-event: 6.0.1
@@ -11119,7 +11180,7 @@ snapshots:
     dependencies:
       '@chainsafe/is-ip': 2.0.2
       '@multiformats/multiaddr': 12.3.4
-      multiformats: 13.3.1
+      multiformats: 13.3.2
 
   '@multiformats/multiaddr-to-uri@11.0.0':
     dependencies:
@@ -11130,13 +11191,13 @@ snapshots:
       '@chainsafe/is-ip': 2.0.2
       '@chainsafe/netmask': 2.0.0
       '@multiformats/dns': 1.0.6
-      multiformats: 13.3.1
+      multiformats: 13.3.2
       uint8-varint: 2.0.4
       uint8arrays: 5.1.0
 
   '@multiformats/murmur3@2.1.8':
     dependencies:
-      multiformats: 13.3.1
+      multiformats: 13.3.2
       murmurhash3js-revisited: 3.0.0
 
   '@multiformats/uri-to-multiaddr@8.0.0':
@@ -13221,6 +13282,8 @@ snapshots:
 
   '@xmldom/xmldom@0.9.6': {}
 
+  '@zip.js/zip.js@2.7.57': {}
+
   abort-controller@3.0.0:
     dependencies:
       event-target-shim: 5.0.1
@@ -13558,7 +13621,7 @@ snapshots:
       it-filter: 3.1.1
       it-merge: 3.0.5
       it-pushable: 3.2.3
-      multiformats: 13.3.1
+      multiformats: 13.3.2
 
   bluebird@3.7.2: {}
 
@@ -13805,6 +13868,8 @@ snapshots:
 
   ci-info@3.9.0: {}
 
+  cid@https://codeload.github.com/multiformats/cid/tar.gz/8a65edf231f041a53e6a3c69657e26edbbaaf189: {}
+
   clean-stack@2.2.0: {}
 
   cli-cursor@2.1.0:
@@ -13977,6 +14042,8 @@ snapshots:
     optionalDependencies:
       typescript: 5.7.3
     optional: true
+
+  crc-32@1.2.2: {}
 
   create-vocs@1.0.0-alpha.5:
     dependencies:
@@ -15121,7 +15188,7 @@ snapshots:
       interface-datastore: 8.3.1
       ipns: 10.0.0
       libp2p: 2.5.0
-      multiformats: 13.3.1
+      multiformats: 13.3.2
     transitivePeerDependencies:
       - bufferutil
       - react-native
@@ -15205,6 +15272,8 @@ snapshots:
     dependencies:
       queue: 6.0.2
 
+  immediate@3.0.6: {}
+
   immer@10.1.1: {}
 
   immutable@5.0.3: {}
@@ -15247,7 +15316,7 @@ snapshots:
   interface-blockstore@5.3.1:
     dependencies:
       interface-store: 6.0.2
-      multiformats: 13.3.1
+      multiformats: 13.3.2
 
   interface-datastore@8.3.1:
     dependencies:
@@ -15292,7 +15361,7 @@ snapshots:
       it-parallel: 3.0.8
       it-pipe: 3.0.1
       it-pushable: 3.2.3
-      multiformats: 13.3.1
+      multiformats: 13.3.2
       p-queue: 8.0.1
       progress-events: 1.0.1
 
@@ -15308,7 +15377,7 @@ snapshots:
       it-batch: 3.0.6
       it-first: 3.0.6
       it-parallel-batch: 3.0.6
-      multiformats: 13.3.1
+      multiformats: 13.3.2
       progress-events: 1.0.1
       rabin-wasm: 0.1.5
       uint8arraylist: 2.4.8
@@ -15329,7 +15398,7 @@ snapshots:
       '@libp2p/logger': 5.1.6
       cborg: 4.2.7
       interface-datastore: 8.3.1
-      multiformats: 13.3.1
+      multiformats: 13.3.2
       protons-runtime: 5.5.0
       timestamp-nano: 1.0.1
       uint8arraylist: 2.4.8
@@ -15471,6 +15540,8 @@ snapshots:
       is-inside-container: 1.0.0
 
   isarray@1.0.0: {}
+
+  isarray@2.0.5: {}
 
   isexe@2.0.0: {}
 
@@ -15792,6 +15863,14 @@ snapshots:
 
   json-schema@0.4.0: {}
 
+  json-stable-stringify@1.2.1:
+    dependencies:
+      call-bind: 1.0.8
+      call-bound: 1.0.3
+      isarray: 2.0.5
+      jsonify: 0.0.1
+      object-keys: 1.1.1
+
   json-stringify-pretty-compact@3.0.0: {}
 
   json-stringify-pretty-compact@4.0.0: {}
@@ -15810,12 +15889,23 @@ snapshots:
     optionalDependencies:
       graceful-fs: 4.2.11
 
+  jsonify@0.0.1: {}
+
   jsprim@1.4.2:
     dependencies:
       assert-plus: 1.0.0
       extsprintf: 1.3.0
       json-schema: 0.4.0
       verror: 1.10.0
+
+  jszip@3.10.1:
+    dependencies:
+      lie: 3.3.0
+      pako: 1.0.11
+      readable-stream: 2.3.8
+      setimmediate: 1.0.5
+
+  jtd-ts@0.2.1: {}
 
   kdbush@4.0.2: {}
 
@@ -15857,13 +15947,17 @@ snapshots:
       it-merge: 3.0.5
       it-parallel: 3.0.8
       merge-options: 3.0.4
-      multiformats: 13.3.1
+      multiformats: 13.3.2
       p-defer: 4.0.1
       p-retry: 6.2.1
       progress-events: 1.0.1
       race-event: 1.3.0
       race-signal: 1.1.0
       uint8arrays: 5.1.0
+
+  lie@3.3.0:
+    dependencies:
+      immediate: 3.0.6
 
   lighthouse-logger@1.4.2:
     dependencies:
@@ -16925,7 +17019,7 @@ snapshots:
       dns-packet: 5.6.1
       thunky: 1.1.0
 
-  multiformats@13.3.1: {}
+  multiformats@13.3.2: {}
 
   mupdf@1.2.0: {}
 
@@ -17050,6 +17144,8 @@ snapshots:
   object-assign@4.1.1: {}
 
   object-hash@3.0.0: {}
+
+  object-keys@1.1.1: {}
 
   observable-webworkers@2.0.1: {}
 
@@ -17213,6 +17309,8 @@ snapshots:
   package-json-from-dist@1.0.1: {}
 
   package-manager-detector@0.2.8: {}
+
+  pako@1.0.11: {}
 
   parent-module@1.0.1:
     dependencies:
@@ -17728,7 +17826,7 @@ snapshots:
     dependencies:
       react-native: 0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1)
 
-  react-native-readium@2.0.2(patch_hash=ieig7i4lit56hsh3n4q4veggoe)(@babel/core@7.26.0)(browserslist@4.24.4)(react-native@0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1))(react@18.3.1):
+  react-native-readium@2.0.2(patch_hash=43a0c4db9a6000ba23c5827237801f0612de22be0c84fc1056945296f2d66c90)(@babel/core@7.26.0)(browserslist@4.24.4)(react-native@0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1))(react@18.3.1):
     dependencies:
       '@d-i-t-a/reader': 2.4.10(@babel/core@7.26.0)(browserslist@4.24.4)
       react: 18.3.1
@@ -18359,6 +18457,15 @@ snapshots:
     dependencies:
       react: 18.3.1
       react-native: 0.77.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.18)(bufferutil@4.0.9)(react@18.3.1)
+
+  rmapi-js@8.1.0:
+    dependencies:
+      base64-js: 1.5.1
+      crc-32: 1.2.2
+      json-stable-stringify: 1.2.1
+      jszip: 3.10.1
+      jtd-ts: 0.2.1
+      uuid: 11.1.0
 
   rollup@4.30.1:
     dependencies:
@@ -19052,7 +19159,7 @@ snapshots:
 
   uint8arrays@5.1.0:
     dependencies:
-      multiformats: 13.3.1
+      multiformats: 13.3.2
 
   undici-types@6.20.0: {}
 
@@ -19219,6 +19326,8 @@ snapshots:
       which-typed-array: 1.1.18
 
   utils-merge@1.0.1: {}
+
+  uuid@11.1.0: {}
 
   uuid@3.4.0: {}
 

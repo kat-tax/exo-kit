@@ -1,174 +1,30 @@
 // @ts-nocheck
 
-const decoder = new TextDecoder();
-const encoder = new TextEncoder();
-
-/**
- * Error to represent when a method is missing on an impl.
- */
-export class NoSuchMethodError extends Error {
-  /**
-   * Creates a new instance.
-   * @param methodName The name of the method that was missing.
-   */
-  constructor(methodName: string) {
-    super(`Method "${methodName}" does not exist on impl.`);
-  }
-}
-
-/**
- * Error to represent when a method is not supported on an impl. This happens
- * when a method on `Hfs` is called with one name and the corresponding method
- * on the impl has a different name. (Example: `text()` and `bytes()`.)
- */
-export class MethodNotSupportedError extends Error {
-  /**
-   * Creates a new instance.
-   * @param methodName The name of the method that was missing.
-   */
-  constructor(methodName: string) {
-    super(`Method "${methodName}" is not supported on this impl.`);
-  }
-}
-
-/**
- * Error to represent when an impl is already set.
- */
-export class ImplAlreadySetError extends Error {
-  /**
-   * Creates a new instance.
-   */
-  constructor() {
-    super('Implementation already set.');
-  }
-}
-
-/**
- * Asserts that the given path is a valid file path.
- * @param fileOrDirPath The path to check.
- * @throws {TypeError} When the path is not a non-empty string.
- */
-function assertValidFileOrDirPath(fileOrDirPath: any): void {
-  if (
-    !fileOrDirPath ||
-    (!(fileOrDirPath instanceof URL) && typeof fileOrDirPath !== 'string')
-  ) {
-    throw new TypeError('Path must be a non-empty string or URL.');
-  }
-}
-
-/**
- * Asserts that the given file contents are valid.
- * @param contents The contents to check.
- * @throws {TypeError} When the contents are not a string or ArrayBuffer.
- */
-function assertValidFileContents(contents: any): void {
-  if (
-    typeof contents !== 'string' &&
-    !(contents instanceof ArrayBuffer) &&
-    !ArrayBuffer.isView(contents)
-  ) {
-    throw new TypeError(
-      'File contents must be a string, ArrayBuffer, or ArrayBuffer view.',
-    );
-  }
-}
-
-/**
- * Converts the given contents to Uint8Array.
- * @param contents The data to convert.
- * @returns The converted Uint8Array.
- * @throws {TypeError} When the contents are not a string or ArrayBuffer.
- */
-function toUint8Array(contents: any): Uint8Array {
-  if (contents instanceof Uint8Array) {
-    return contents;
-  }
-
-  if (typeof contents === 'string') {
-    return encoder.encode(contents);
-  }
-
-  if (contents instanceof ArrayBuffer) {
-    return new Uint8Array(contents);
-  }
-
-  if (ArrayBuffer.isView(contents)) {
-    const bytes = contents.buffer.slice(
-      contents.byteOffset,
-      contents.byteOffset + contents.byteLength,
-    );
-    return new Uint8Array(bytes);
-  }
-  throw new TypeError(
-    'Invalid contents type. Expected string or ArrayBuffer.',
-  );
-}
-
-//-----------------------------------------------------------------------------
-// Exports
-//-----------------------------------------------------------------------------
-
-/**
- * A class representing a log entry.
- */
-export class LogEntry {
-  /**
-   * The type of log entry.
-   * @type {string}
-   */
-  type: string;
-
-  /**
-   * The data associated with the log entry.
-   * @type {any}
-   */
-  data: any;
-
-  /**
-   * The time at which the log entry was created.
-   * @type {number}
-   */
-  timestamp: number = Date.now();
-
-  /**
-   * Creates a new instance.
-   * @param {string} type The type of log entry.
-   * @param {any} [data] The data associated with the log entry.
-   */
-  constructor(type: string, data: any) {
-    this.type = type;
-    this.data = data;
-  }
-}
+import type {HfsImpl, HfsDirectoryEntry, HfsWalkEntry} from './hfs.types';
+import * as _ from './hfs.utils';
 
 /**
  * A class representing a file system utility library.
  */
 export class Hfs implements HfsImpl {
-  /**
-   * The base implementation for this instance.
-   */
+  /** The base implementation for this instance. */
   #baseImpl: HfsImpl;
-
-  /**
-   * The current implementation for this instance.
-   */
+  /** The current implementation for this instance. */
   #impl: HfsImpl;
-
-  /**
-   * A map of log names to their corresponding entries.
-   */
-  #logs: Map<string, Array<LogEntry>> = new Map();
+  /** A map of log names to their corresponding entries. */
+  #logs: Map<string, Array<_.LogEntry>> = new Map();
+  /** The decoder for the current implementation. */
+  #decoder: TextDecoder;
 
   /**
    * Creates a new instance.
    * @param {object} options The options for the instance.
    * @param {HfsImpl} options.impl The implementation to use.
    */
-  constructor({ impl }: {impl: HfsImpl;}) {
+  constructor({impl}: {impl: HfsImpl;}) {
     this.#baseImpl = impl;
     this.#impl = impl;
+    this.#decoder = new TextDecoder();
   }
 
   /**
@@ -179,7 +35,7 @@ export class Hfs implements HfsImpl {
    */
   #log(methodName: string, ...args: any[]): void {
     for (const logs of this.#logs.values()) {
-      logs.push(new LogEntry('call', { methodName, args }));
+      logs.push(new _.LogEntry('call', { methodName, args }));
     }
   }
 
@@ -208,7 +64,7 @@ export class Hfs implements HfsImpl {
    * @returns {Array<LogEntry>} The entries in the log.
    * @throws {Error} When the log does not exist.
    */
-  logEnd(name: string): Array<LogEntry> {
+  logEnd(name: string): Array<_.LogEntry> {
     if (this.#logs.has(name)) {
       const logs = this.#logs.get(name);
       this.#logs.delete(name);
@@ -235,7 +91,7 @@ export class Hfs implements HfsImpl {
     this.#log('implSet', impl);
 
     if (this.#impl !== this.#baseImpl) {
-      throw new ImplAlreadySetError();
+      throw new _.ImplAlreadySetError();
     }
 
     this.#impl = impl;
@@ -258,7 +114,7 @@ export class Hfs implements HfsImpl {
    */
   #assertImplMethod(methodName: string): void {
     if (typeof this.#impl[methodName] !== 'function') {
-      throw new NoSuchMethodError(methodName);
+      throw new _.NoSuchMethodError(methodName);
     }
   }
 
@@ -273,7 +129,7 @@ export class Hfs implements HfsImpl {
    */
   #assertImplMethodAlt(methodName: string, targetMethodName: string): void {
     if (typeof this.#impl[methodName] !== 'function') {
-      throw new MethodNotSupportedError(targetMethodName);
+      throw new _.MethodNotSupportedError(targetMethodName);
     }
   }
 
@@ -324,10 +180,10 @@ export class Hfs implements HfsImpl {
    * @throws {TypeError} When the file path is not a non-empty string.
    */
   async text(filePath: string | URL): Promise<string | undefined> {
-    assertValidFileOrDirPath(filePath);
+    _.assertValidFileOrDirPath(filePath);
 
     const result = await this.#callImplMethodAlt("bytes", "text", filePath);
-    return result ? decoder.decode(result) : undefined;
+    return result ? this.#decoder.decode(result) : undefined;
   }
 
   /**
@@ -339,10 +195,10 @@ export class Hfs implements HfsImpl {
    * @throws {TypeError} When the file path is not a non-empty string.
    */
   async json(filePath: string | URL): Promise<any | undefined> {
-    assertValidFileOrDirPath(filePath);
+    _.assertValidFileOrDirPath(filePath);
 
     const result = await this.#callImplMethodAlt("bytes", "json", filePath);
-    return result ? JSON.parse(decoder.decode(result)) : undefined;
+    return result ? JSON.parse(this.#decoder.decode(result)) : undefined;
   }
 
   /**
@@ -354,8 +210,7 @@ export class Hfs implements HfsImpl {
    * @deprecated Use bytes() instead.
    */
   async arrayBuffer(filePath: string | URL): Promise<ArrayBuffer | undefined> {
-    assertValidFileOrDirPath(filePath);
-
+    _.assertValidFileOrDirPath(filePath);
     const result = await this.#callImplMethodAlt(
       "bytes",
       "arrayBuffer",
@@ -372,7 +227,7 @@ export class Hfs implements HfsImpl {
    * @throws {TypeError} When the file path is not a non-empty string.
    */
   async bytes(filePath: string | URL): Promise<Uint8Array | undefined> {
-    assertValidFileOrDirPath(filePath);
+    _.assertValidFileOrDirPath(filePath);
     return this.#callImplMethod("bytes", filePath);
   }
 
@@ -386,11 +241,11 @@ export class Hfs implements HfsImpl {
    * @throws {TypeError} When the file path is not a non-empty string.
    */
   async write(filePath: string | URL, contents: string | ArrayBuffer | ArrayBufferView): Promise<void> {
-    assertValidFileOrDirPath(filePath);
-    assertValidFileContents(contents);
+    _.assertValidFileOrDirPath(filePath);
+    _.assertValidFileContents(contents);
     this.#log("write", filePath, contents);
 
-    const value = toUint8Array(contents);
+    const value = _.toUint8Array(contents);
     return this.#callImplMethodWithoutLog("write", filePath, value);
   }
 
@@ -406,11 +261,11 @@ export class Hfs implements HfsImpl {
    * @throws {Error} When the file cannot be appended to.
    */
   async append(filePath: string | URL, contents: string | ArrayBuffer | ArrayBufferView): Promise<void> {
-    assertValidFileOrDirPath(filePath);
-    assertValidFileContents(contents);
+    _.assertValidFileOrDirPath(filePath);
+    _.assertValidFileContents(contents);
     this.#log("append", filePath, contents);
 
-    const value = toUint8Array(contents);
+    const value = _.toUint8Array(contents);
     return this.#callImplMethodWithoutLog("append", filePath, value);
   }
 
@@ -422,7 +277,7 @@ export class Hfs implements HfsImpl {
    * @throws {TypeError} When the file path is not a non-empty string.
    */
   async isFile(filePath: string | URL): Promise<boolean> {
-    assertValidFileOrDirPath(filePath);
+    _.assertValidFileOrDirPath(filePath);
     return this.#callImplMethod("isFile", filePath);
   }
 
@@ -434,7 +289,7 @@ export class Hfs implements HfsImpl {
    * @throws {TypeError} When the directory path is not a non-empty string.
    */
   async isDirectory(dirPath: string | URL): Promise<boolean> {
-    assertValidFileOrDirPath(dirPath);
+    _.assertValidFileOrDirPath(dirPath);
     return this.#callImplMethod("isDirectory", dirPath);
   }
 
@@ -446,7 +301,7 @@ export class Hfs implements HfsImpl {
    * @throws {TypeError} When the directory path is not a non-empty string.
    */
   async createDirectory(dirPath: string | URL): Promise<void> {
-    assertValidFileOrDirPath(dirPath);
+    _.assertValidFileOrDirPath(dirPath);
     return this.#callImplMethod("createDirectory", dirPath);
   }
 
@@ -460,7 +315,7 @@ export class Hfs implements HfsImpl {
    * @throws {TypeError} When the file path is not a non-empty string.
    */
   async delete(filePath: string | URL): Promise<boolean> {
-    assertValidFileOrDirPath(filePath);
+    _.assertValidFileOrDirPath(filePath);
     return this.#callImplMethod("delete", filePath);
   }
 
@@ -474,7 +329,7 @@ export class Hfs implements HfsImpl {
    * @throws {TypeError} When the directory path is not a non-empty string.
    */
   async deleteAll(dirPath: string | URL): Promise<boolean> {
-    assertValidFileOrDirPath(dirPath);
+    _.assertValidFileOrDirPath(dirPath);
     return this.#callImplMethod("deleteAll", dirPath);
   }
 
@@ -487,7 +342,7 @@ export class Hfs implements HfsImpl {
    * @throws {Error} If the directory cannot be read.
    */
   async *list(dirPath: string | URL): AsyncIterable<HfsDirectoryEntry> {
-    assertValidFileOrDirPath(dirPath);
+    _.assertValidFileOrDirPath(dirPath);
     yield* await this.#callImplMethod("list", dirPath);
   }
 
@@ -509,7 +364,7 @@ export class Hfs implements HfsImpl {
     dirPath: string | URL,
     { directoryFilter = () => true, entryFilter = () => true }: {directoryFilter?: (entry: HfsWalkEntry) => Promise<boolean> | boolean; entryFilter?: (entry: HfsWalkEntry) => Promise<boolean> | boolean;} = {},
   ): AsyncIterable<HfsWalkEntry> {
-    assertValidFileOrDirPath(dirPath);
+    _.assertValidFileOrDirPath(dirPath);
     this.#log("walk", dirPath, { directoryFilter, entryFilter });
 
     // inner function for recursion without additional logging
@@ -599,7 +454,7 @@ export class Hfs implements HfsImpl {
    * @throws {Error} If the file cannot be read.
    */
   async size(filePath: string | URL): Promise<number> {
-    assertValidFileOrDirPath(filePath);
+    _.assertValidFileOrDirPath(filePath);
     return this.#callImplMethod("size", filePath);
   }
 
@@ -611,7 +466,7 @@ export class Hfs implements HfsImpl {
    * @throws {TypeError} If the path is not a string or URL.
    */
   async lastModified(fileOrDirPath: string | URL): Promise<Date | undefined> {
-    assertValidFileOrDirPath(fileOrDirPath);
+    _.assertValidFileOrDirPath(fileOrDirPath);
     return this.#callImplMethod("lastModified", fileOrDirPath);
   }
 
@@ -624,8 +479,8 @@ export class Hfs implements HfsImpl {
    * @throws {Error} If the file cannot be copied.
    */
   async copy(source: string | URL, destination: string | URL): Promise<void> {
-    assertValidFileOrDirPath(source);
-    assertValidFileOrDirPath(destination);
+    _.assertValidFileOrDirPath(source);
+    _.assertValidFileOrDirPath(destination);
     return this.#callImplMethod("copy", source, destination);
   }
 
@@ -639,8 +494,8 @@ export class Hfs implements HfsImpl {
    * @throws {Error} If the directory cannot be copied.
    */
   async copyAll(source: string | URL, destination: string | URL): Promise<void> {
-    assertValidFileOrDirPath(source);
-    assertValidFileOrDirPath(destination);
+    _.assertValidFileOrDirPath(source);
+    _.assertValidFileOrDirPath(destination);
     return this.#callImplMethod("copyAll", source, destination);
   }
 
@@ -653,8 +508,8 @@ export class Hfs implements HfsImpl {
    * @throws {Error} If the file or directory cannot be moved.
    */
   async move(source: string | URL, destination: string | URL): Promise<void> {
-    assertValidFileOrDirPath(source);
-    assertValidFileOrDirPath(destination);
+    _.assertValidFileOrDirPath(source);
+    _.assertValidFileOrDirPath(destination);
     return this.#callImplMethod("move", source, destination);
   }
 
@@ -669,8 +524,8 @@ export class Hfs implements HfsImpl {
    * @throws {Error} If the file or directory cannot be moved.
    */
   async moveAll(source: string | URL, destination: string | URL): Promise<void> {
-    assertValidFileOrDirPath(source);
-    assertValidFileOrDirPath(destination);
+    _.assertValidFileOrDirPath(source);
+    _.assertValidFileOrDirPath(destination);
     return this.#callImplMethod("moveAll", source, destination);
   }
 }

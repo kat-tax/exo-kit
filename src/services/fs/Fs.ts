@@ -1,33 +1,23 @@
-// import ipfs from './lib/core/plugins/IpfsHfs';
-import {hfs} from './lib/core/plugins/WebHfs';
 import Hasher from './lib/hash/WebHasher';
 import {isText} from './lib/data';
 import * as web from './lib/utils/web';
 
-import type {HfsImpl} from './lib/core/types';
 import type {FSBase, FileSystemIn, HfsType, PickFilesOptions, PickDirectoryOptions} from './Fs.interface';
+import type {HfsImpl} from './lib/core/hfs.types';
 
 export class FSService implements FSBase {
-  async init(type?: HfsType): Promise<HfsImpl> {
-    // TODO: implement ipfs
-    return type === 'ipfs' ? await hfs() : await hfs();
-  }
-
-  async watch(path: string, callback: (records: unknown[]) => void) {
-    try {
-      // @ts-expect-error https://github.com/whatwg/fs/blob/main/proposals/FileSystemObserver.md
-      const $ = new FileSystemObserver(async (records, observer) => {
-        console.log('>> fs', records, observer);
-        callback(records);
-      });
-      const root = await navigator.storage.getDirectory();
-      const dir = !!path && await root.getDirectoryHandle(path);
-      await $.observe(dir || root, {recursive: false});
-      return $.disconnect as () => void;
-    } catch (e) {
-     console.error('>> fs [error]', e);
-     return false;
+  async init(backend: HfsType = 'local', token?: string): Promise<HfsImpl> {
+    switch (backend) {
+      case 'local':
+        return (await import('./lib/core/backend/local')).mount();
+      case 'ipfs':
+        return (await import('./lib/core/backend/ipfs')).mount();
+      case 'rmc':
+        return (await import('./lib/core/backend/rmc')).mount(token);
+      default:
+        backend satisfies never;
     }
+    throw new Error('Invalid backend');
   }
 
   async pick(options?: PickFilesOptions) {
@@ -71,5 +61,22 @@ export class FSService implements FSBase {
     const total = quota || 0;
     const used = usage || 0;
     return {total, used, free: total - used};
+  }
+
+  async watch(path: string, callback: (records: unknown[]) => void) {
+    try {
+      // @ts-expect-error https://github.com/whatwg/fs/blob/main/proposals/FileSystemObserver.md
+      const $ = new FileSystemObserver(async (records, observer) => {
+        console.log('>> fs', records, observer);
+        callback(records);
+      });
+      const root = await navigator.storage.getDirectory();
+      const dir = !!path && await root.getDirectoryHandle(path);
+      await $.observe(dir || root, {recursive: false});
+      return $.disconnect as () => void;
+    } catch (e) {
+     console.error('>> fs [error]', e);
+     return false;
+    }
   }
 }

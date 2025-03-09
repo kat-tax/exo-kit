@@ -5,7 +5,6 @@ export * as web from './lib/utils/web';
 
 export const FS = new FSService();
 
-export const init = FS.init;
 export const watch = FS.watch;
 
 export const pick = FS.pick;

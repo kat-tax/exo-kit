@@ -1,8 +1,13 @@
-import type {HfsImpl} from './lib/core/types';
+import type {HfsImpl} from './lib/core/hfs.types';
 // import type {IpfsHfs} from './lib/plugins/IpfsHfs';
 
-export * from './lib/core/types';
-export type HfsType = 'fs' | 'ipfs';
+export * from './lib/core/hfs.types';
+
+export type HfsType =
+  | 'local'
+  | 'ipfs'
+  // | 'zip'
+  | 'rmc';
 
 export interface FSBase {
   init(type?: HfsType): Promise<HfsImpl>,

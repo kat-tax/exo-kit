@@ -1,24 +1,4 @@
-export interface HfsDirectoryEntry {
-  /** The name of the file or directory. */
-  name: string;
-  /** The size of the entry in bytes */
-  size: number;
-  /** The last modified date of the entry */
-  lastModified: Date;
-  /** True if the entry is a directory, false if not. */
-  isDirectory: boolean;
-  /** True if the entry is a file, false if not. */
-  isFile: boolean;
-  /** True if the entry is a symbolic link, false if not. */
-  isSymlink: boolean;
-}
-
-export interface HfsWalkEntry extends HfsDirectoryEntry {
-  /** The path of the entry relative to the directory that was walked. */
-  path: string;
-  /** The depth of the entry in the directory tree from the directory that was walked. */
-  depth: number;
-}
+import type {Content, Metadata} from 'rmapi-js';
 
 export interface HfsImpl {
   /**
@@ -35,7 +15,7 @@ export interface HfsImpl {
    * @returns A promise that resolves when the file is written.
    * @throws {Error} If the file cannot be written.
    */
-  write?(filePath: string|URL, data: Uint8Array): Promise<void>;
+  write?(filePath: string|URL, data: Uint8Array|string): Promise<void>;
 
   /**
    * Appends the given data to the given file. For text, assumes UTF-8 encoding.
@@ -44,7 +24,7 @@ export interface HfsImpl {
    * @returns A promise that resolves when the file is written.
    * @throws {Error} If the file cannot be written.
    */
-  append?(filePath: string|URL, data: Uint8Array): Promise<void>;
+  append?(filePath: string|URL, data: Uint8Array|string): Promise<void>;
 
   /**
    * Checks if the given file exists.
@@ -156,4 +136,36 @@ export interface HfsImpl {
    * @throws {Error} If the source cannot be read.
    */
   moveAll?(source: string|URL, destination: string|URL): Promise<void>;
+}
+
+
+export interface HfsDirectoryEntry {
+  /** The name of the file or directory. */
+  name: string;
+  /** The size of the entry in bytes */
+  size: number;
+  /** The base64-encoded SVG icon image for the entry **/
+  icon?: string;
+  /** The hash of the entry. */
+  hash?: string;
+  /** The last modified date of the entry */
+  lastModified: Date;
+  /** True if the entry is a directory, false if not. */
+  isDirectory: boolean;
+  /** True if the entry is a file, false if not. */
+  isFile: boolean;
+  /** True if the entry is a symbolic link, false if not. */
+  isSymlink: boolean;
+  /** Extra attributes from the reMarkable filesystem */
+  remarkable?: {
+    content: Content;
+    metadata: Metadata;
+  };
+}
+
+export interface HfsWalkEntry extends HfsDirectoryEntry {
+  /** The path of the entry relative to the directory that was walked. */
+  path: string;
+  /** The depth of the entry in the directory tree from the directory that was walked. */
+  depth: number;
 }
