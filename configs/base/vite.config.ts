@@ -59,6 +59,7 @@ export default (platform: 'web' | 'native') => defineConfig(env => ({
         video: 'src/assets/video/Video.export',
         // Layout
         gesture: 'src/layout/gesture/Gesture.export',
+        grid: 'src/layout/grid/Grid.export',
         motion: 'src/layout/motion/Motion.export',
         navigation: 'src/layout/navigation/Navigation.export',
         skeleton: 'src/layout/skeleton/Skeleton.export',

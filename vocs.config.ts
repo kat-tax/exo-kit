@@ -125,6 +125,10 @@ export default defineConfig({
           link: '/layout/skeleton',
           text: 'Skeleton',
         },
+        {
+          link: '/layout/grid',
+          text: 'Grid (experimental)',
+        },
         // {
         //   link: '/layout/navigation',
         //   text: 'Navigation',

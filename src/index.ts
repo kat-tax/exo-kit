@@ -16,6 +16,7 @@ export type * from './assets/video/Video.export';
 
 // Layout
 export type * from './layout/gesture/Gesture.export';
+export type * from './layout/grid/Grid.export';
 export type * from './layout/motion/Motion.export';
 export type * from './layout/navigation/Navigation.export';
 export type * from './layout/skeleton/Skeleton.export';
