@@ -432,5 +432,6 @@
       "@legendapp/list@1.0.0-beta.8": "patches/@legendapp__list@1.0.0-beta.8.patch",
       "@legendapp/motion@2.4.0": "patches/@legendapp__motion@2.4.0.patch"
     }
-  }
+  },
+  "packageManager": "pnpm@10.11.0"
 }
