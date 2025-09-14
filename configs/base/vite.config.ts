@@ -4,7 +4,6 @@ import paths from 'vite-tsconfig-paths';
 import react from '@vitejs/plugin-react-swc';
 // import sonda from 'sonda/vite';
 
-
 export default (platform: 'web' | 'native') => defineConfig(env => ({
   plugins: [
     paths(),
@@ -19,24 +18,6 @@ export default (platform: 'web' | 'native') => defineConfig(env => ({
   ],
   define: {
     __DEV__: JSON.stringify(env.mode === 'development'),
-  },
-  resolve: {
-    extensions: [
-      `.${platform}.tsx`,
-      `.${platform}.jsx`,
-      `.${platform}.ts`,
-      `.${platform}.js`,
-      '.mjs',
-      '.mts',
-      '.ts',
-      '.tsx',
-      '.js',
-      '.jsx',
-      '.json',
-    ],
-    alias: platform === 'web' ? {
-      'react-native': 'react-native-web',
-    } : undefined,
   },
   build: {
     lib: {
@@ -86,4 +67,39 @@ export default (platform: 'web' | 'native') => defineConfig(env => ({
       },
     },
   },
+  resolve: {
+    extensions: [
+      `.${platform}.tsx`,
+      `.${platform}.jsx`,
+      `.${platform}.ts`,
+      `.${platform}.js`,
+      '.mjs',
+      '.mts',
+      '.ts',
+      '.tsx',
+      '.js',
+      '.jsx',
+      '.json',
+    ],
+    alias: platform === 'web' ? {
+      'react-native': 'react-native-web',
+    } : undefined,
+  },
+  optimizeDeps: {
+    esbuildOptions: {
+      resolveExtensions: [
+        `.${platform}.tsx`,
+        `.${platform}.jsx`,
+        `.${platform}.ts`,
+        `.${platform}.js`,
+        '.mjs',
+        '.mts',
+        '.ts',
+        '.tsx',
+        '.js',
+        '.jsx',
+        '.json',
+      ],
+    },
+  }
 }));
