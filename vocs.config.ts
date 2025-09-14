@@ -1,6 +1,20 @@
 import {defineConfig} from 'vocs';
 import {version} from './package.json';
 
+const EXTENSIONS = [
+  '.web.tsx',
+  '.web.jsx',
+  '.web.ts',
+  '.web.js',
+  '.mjs',
+  '.mts',
+  '.ts',
+  '.tsx',
+  '.js',
+  '.jsx',
+  '.json',
+];
+
 export default defineConfig({
   title: 'EXO KIT',
   sponsors: [
@@ -284,21 +298,14 @@ export default defineConfig({
   },
   vite: {
     resolve: {
-      extensions: [
-        '.web.tsx',
-        '.web.jsx',
-        '.web.ts',
-        '.web.js',
-        '.mjs',
-        '.mts',
-        '.ts',
-        '.tsx',
-        '.js',
-        '.jsx',
-        '.json',
-      ],
+      extensions: EXTENSIONS,
       alias: {
         'react-native': 'react-native-web',
+      },
+    },
+    optimizeDeps: {
+      esbuildOptions: {
+        resolveExtensions: EXTENSIONS,
       },
     },
     define: {
