@@ -9,7 +9,7 @@ export type IconRuntimeProps = IconProps & {
   hasPlugin: boolean,
 };
 
-export const Icon: IconComponent = (props: IconProps) => {
+export const Icon: Omit<IconComponent, 'New'> = (props: IconProps) => {
   const $props = props as IconRuntimeProps;
 
   if (!$props?.hasPlugin)

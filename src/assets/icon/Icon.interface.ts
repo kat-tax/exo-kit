@@ -1,8 +1,13 @@
-import type {XmlProps} from 'react-native-svg';
+import type {StyleSheet} from 'react-native';
 
-export type IconComponent = (props: IconProps) => JSX.Element | null;
+export type IconComponent = ((props: IconProps) => JSX.Element | null) & {
+  New: (
+    icon?: React.ReactElement,
+    styles?: StyleSheet.NamedStyles<object>,
+  ) => React.ReactElement | null,
+};
 
-export interface IconProps extends Omit<XmlProps, 'xml'> {
+export interface IconProps {
   /** The name of the icon to display */
   name: string,
   /** The size of the icon */
@@ -11,4 +16,6 @@ export interface IconProps extends Omit<XmlProps, 'xml'> {
   color?: string,
   /** The identifier used for testing */
   testID?: string,
+  /** The override styles of the icon */
+  style?: StyleSheet.NamedStyles<object>,
 }
