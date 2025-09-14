@@ -22,11 +22,15 @@ export const Image: ImageComponent = (props: ImageProps) => {
     ? 'force-cache'
     : 'default';
 
+  const numericWidth = typeof props.width === 'number' ? props.width : undefined;
+  const numericHeight = typeof props.height === 'number' ? props.height : undefined;
+
   return (
     <ImageBase
       style={[props.style, {
         width: props.width,
         height: props.height,
+        // @ts-ignore Web only prop
         backgroundRepeat: 'no-repeat',
         backgroundImage: `url(${imagePlaceholder})`,
         backgroundSize: props.resizeMode,
@@ -34,14 +38,14 @@ export const Image: ImageComponent = (props: ImageProps) => {
       }]}
       source={{
         uri: props.url,
-        width: props.width,
-        height: props.height,
+        width: numericWidth,
+        height: numericHeight,
         cache,
       }}
       loadingIndicatorSource={{
         uri: imageLoading,
-        width: props.width,
-        height: props.height,
+        width: numericWidth,
+        height: numericHeight,
         cache,
       }}
       // @ts-ignore Web only prop

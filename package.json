@@ -1,6 +1,6 @@
 {
   "name": "react-exo",
-  "version": "0.19.0",
+  "version": "0.20.0",
   "type": "module",
   "types": "./lib/types/index.d.ts",
   "repository": {
@@ -8,14 +8,16 @@
     "url": "https://github.com/kat-tax/exo-kit.git"
   },
   "scripts": {
+    "dev2": "tsdown --watch",
+    "build2": "tsdown",
     "dev": "conc -c 'auto' 'pnpm:*:dev'",
-    "build": "conc -c 'auto' 'pnpm:*(!docs):build'",
+    "build": "conc -c 'auto' 'pnpm:*:build'",
     "web:dev": "vite dev -c ./configs/web/vite.config.ts --port 7106",
     "web:build": "vite build -c ./configs/web/vite.config.ts",
     "native:dev": "vite dev -c ./configs/native/vite.config.ts --port 7206",
     "native:build": "vite build -c ./configs/native/vite.config.ts",
-    "docs:dev": "vocs dev -p 7306 --host",
-    "docs:build": "vocs build -l info -c -o ./gen || exit 0"
+    "docs:_dev": "vocs dev -p 7306 --host",
+    "docs:_build": "vocs build -l info -c -o ./gen || exit 0"
   },
   "exports": {
     ".": {
@@ -423,6 +425,7 @@
     "shiki": "^1.24.4",
     "sonda": "latest",
     "typescript": "^5.7.2",
+    "tsdown": "^0.15.1",
     "vite": "^5.4.11",
     "vite-plugin-dts": "^4.4.0",
     "vite-tsconfig-paths": "^5.1.4",
