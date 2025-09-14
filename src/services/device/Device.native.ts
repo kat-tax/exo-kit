@@ -26,6 +26,9 @@ export class DeviceService implements DeviceBase {
   getLocale(): string {
     switch (Platform.OS) {
       case 'ios':
+        // TODO: per app ios settings
+        // import {Settings} from 'react-native';
+        // Settings.get('AppleLanguages')
         return ((NativeModules.SettingsManager?.settings?.AppleLocale
           || NativeModules.SettingsManager?.settings?.AppleLanguages?.[0])
           ?.split('-')?.shift()) || 'en';
