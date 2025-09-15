@@ -49,7 +49,7 @@ export class WebHfsImpl implements HfsImpl {
     }
 
     const writable = await handle.createWritable();
-    await writable.write(contents);
+    await writable.write(contents as FileSystemWriteChunkType);
     await writable.close();
   }
 
@@ -555,7 +555,7 @@ async function readMetadata(
       // @ts-expect-error
       root.getDirectory(fileOrDirPath, {}, h => h.getMetadata(res, rej), rej)
     });
-  
+
   const file: () => Promise<FileSystemEntryMetadata> = () =>
     new Promise((res, rej) => {
       // @ts-expect-error
