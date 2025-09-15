@@ -1,6 +1,6 @@
 {
   "name": "react-exo",
-  "version": "0.20.3",
+  "version": "0.20.7",
   "type": "module",
   "types": "./lib/types/index.d.ts",
   "repository": {
@@ -20,153 +20,154 @@
   "exports": {
     ".": {
       "types": "./lib/types/index.d.ts",
-      "import": "./lib/web/index.js",
-      "require": "./lib/native/index.js"
+      "browser": "./lib/web/index.js",
+      "react-native": "./lib/native/index.js"
     },
     "./book": {
       "types": "./lib/types/book.d.ts",
-      "import": "./lib/web/book.js",
-      "require": "./lib/native/book.js"
+      "browser": "./lib/web/book.js",
+      "react-native": "./lib/native/book.js"
     },
     "./code": {
       "types": "./lib/types/code.d.ts",
-      "import": "./lib/web/code.js",
-      "require": "./lib/native/code.js"
+      "browser": "./lib/web/code.js",
+      "react-native": "./lib/native/code.js"
     },
     "./game": {
       "types": "./lib/types/game.d.ts",
-      "import": "./lib/web/game.js",
-      "require": "./lib/native/game.js"
+      "browser": "./lib/web/game.js",
+      "react-native": "./lib/native/game.js"
     },
     "./icon": {
       "types": "./lib/types/icon.d.ts",
-      "import": "./lib/web/icon.js",
-      "require": "./lib/native/icon.js"
+      "browser": "./lib/web/icon.js",
+      "react-native": "./lib/native/icon.js"
     },
     "./image": {
       "types": "./lib/types/image.d.ts",
-      "import": "./lib/web/image.js",
-      "require": "./lib/native/image.js"
+      "browser": "./lib/web/image.js",
+      "react-native": "./lib/native/image.js"
     },
     "./lottie": {
       "types": "./lib/types/lottie.d.ts",
-      "import": "./lib/web/lottie.js",
-      "require": "./lib/native/lottie.js"
+      "browser": "./lib/web/lottie.js",
+      "react-native": "./lib/native/lottie.js"
     },
     "./map": {
       "types": "./lib/types/map.d.ts",
-      "import": "./lib/web/map.js",
-      "require": "./lib/native/map.js"
+      "browser": "./lib/web/map.js",
+      "react-native": "./lib/native/map.js"
     },
     "./markdown": {
       "types": "./lib/types/markdown.d.ts",
-      "import": "./lib/web/markdown.js",
-      "require": "./lib/native/markdown.js"
+      "browser": "./lib/web/markdown.js",
+      "react-native": "./lib/native/markdown.js"
     },
     "./model": {
       "types": "./lib/types/model.d.ts",
-      "import": "./lib/web/model.js",
-      "require": "./lib/native/model.js"
+      "browser": "./lib/web/model.js",
+      "react-native": "./lib/native/model.js"
     },
     "./pdf": {
       "types": "./lib/types/pdf.d.ts",
-      "import": "./lib/web/pdf.js",
-      "require": "./lib/native/pdf.js"
+      "browser": "./lib/web/pdf.js",
+      "react-native": "./lib/native/pdf.js"
     },
     "./rive": {
       "types": "./lib/types/rive.d.ts",
-      "import": "./lib/web/rive.js",
-      "require": "./lib/native/rive.js"
+      "browser": "./lib/web/rive.js",
+      "react-native": "./lib/native/rive.js"
     },
     "./video": {
       "types": "./lib/types/video.d.ts",
-      "import": "./lib/web/video.js",
-      "require": "./lib/native/video.js"
+      "browser": "./lib/web/video.js",
+      "react-native": "./lib/native/video.js"
     },
     "./device": {
       "types": "./lib/types/device.d.ts",
-      "import": "./lib/web/device.js",
-      "require": "./lib/native/device.js"
+      "browser": "./lib/web/device.js",
+      "react-native": "./lib/native/device.js"
     },
     "./fs": {
       "types": "./lib/types/fs.d.ts",
-      "import": "./lib/web/fs.js",
-      "require": "./lib/native/fs.js"
+      "browser": "./lib/web/fs.js",
+      "react-native": "./lib/native/fs.js"
     },
     "./kv": {
       "types": "./lib/types/kv.d.ts",
-      "import": "./lib/web/kv.js",
-      "require": "./lib/native/kv.js"
+      "browser": "./lib/web/kv.js",
+      "react-native": "./lib/native/kv.js"
     },
     "./redux": {
       "types": "./lib/types/redux.d.ts",
-      "import": "./lib/web/redux.js",
-      "require": "./lib/native/redux.js"
+      "browser": "./lib/web/redux.js",
+      "react-native": "./lib/native/redux.js"
     },
     "./toast": {
       "types": "./lib/types/toast.d.ts",
-      "import": "./lib/web/toast.js",
-      "require": "./lib/native/toast.js"
+      "browser": "./lib/web/toast.js",
+      "react-native": "./lib/native/toast.js"
     },
     "./gesture": {
       "types": "./lib/types/gesture.d.ts",
-      "import": "./lib/web/gesture.js",
-      "require": "./lib/native/gesture.js"
+      "browser": "./lib/web/gesture.js",
+      "react-native": "./lib/native/gesture.js"
     },
     "./grid": {
       "types": "./lib/types/grid.d.ts",
-      "import": "./lib/web/grid.js",
-      "require": "./lib/native/grid.js"
+      "browser": "./lib/web/grid.js",
+      "react-native": "./lib/native/grid.js"
     },
     "./motion": {
       "types": "./lib/types/motion.d.ts",
-      "import": "./lib/web/motion.js",
-      "require": "./lib/native/motion.js"
+      "browser": "./lib/web/motion.js",
+      "react-native": "./lib/native/motion.js"
     },
     "./navigation": {
       "types": "./lib/types/navigation.d.ts",
-      "import": "./lib/web/navigation.js",
-      "require": "./lib/native/navigation.js"
+      "browser": "./lib/web/navigation.js",
+      "react-native": "./lib/native/navigation.js"
     },
     "./skeleton": {
       "types": "./lib/types/skeleton.d.ts",
-      "import": "./lib/web/skeleton.js",
-      "require": "./lib/native/skeleton.js"
+      "browser": "./lib/web/skeleton.js",
+      "react-native": "./lib/native/skeleton.js"
     },
     "./checkbox": {
       "types": "./lib/types/checkbox.d.ts",
-      "import": "./lib/web/checkbox.js",
-      "require": "./lib/native/checkbox.js"
+      "browser": "./lib/web/checkbox.js",
+      "require": "./lib/native/checkbox.js",
+      "react-native": "./lib/native/checkbox.js"
     },
     "./picker": {
       "types": "./lib/types/picker.d.ts",
-      "import": "./lib/web/picker.js",
-      "require": "./lib/native/picker.js"
+      "browser": "./lib/web/picker.js",
+      "react-native": "./lib/native/picker.js"
     },
     "./progress": {
       "types": "./lib/types/progress.d.ts",
-      "import": "./lib/web/progress.js",
-      "require": "./lib/native/progress.js"
+      "browser": "./lib/web/progress.js",
+      "react-native": "./lib/native/progress.js"
     },
     "./radio": {
       "types": "./lib/types/radio.d.ts",
-      "import": "./lib/web/radio.js",
-      "require": "./lib/native/radio.js"
+      "browser": "./lib/web/radio.js",
+      "react-native": "./lib/native/radio.js"
     },
     "./slider": {
       "types": "./lib/types/slider.d.ts",
-      "import": "./lib/web/slider.js",
-      "require": "./lib/native/slider.js"
+      "browser": "./lib/web/slider.js",
+      "react-native": "./lib/native/slider.js"
     },
     "./switch": {
       "types": "./lib/types/switch.d.ts",
-      "import": "./lib/web/switch.js",
-      "require": "./lib/native/switch.js"
+      "browser": "./lib/web/switch.js",
+      "react-native": "./lib/native/switch.js"
     },
     "./utils": {
       "types": "./lib/types/utils.d.ts",
-      "import": "./lib/web/utils.js",
-      "require": "./lib/native/utils.js"
+      "browser": "./lib/web/utils.js",
+      "react-native": "./lib/native/utils.js"
     },
     "./checkbox.css": "./lib/web/checkbox.css",
     "./radio.css": "./lib/web/radio.css",
@@ -180,39 +181,6 @@
       "types": "./lib/types/babel-plugin-iconify-transform.d.ts",
       "require": "./lib/native/babel-plugin-iconify-transform.cjs"
     }
-  },
-  "react-native": {
-    "./index.js": "./lib/native/index.js",
-    "./book.js": "./lib/native/book.js",
-    "./code.js": "./lib/native/code.js",
-    "./game.js": "./lib/native/game.js",
-    "./icon.js": "./lib/native/icon.js",
-    "./image.js": "./lib/native/image.js",
-    "./lottie.js": "./lib/native/lottie.js",
-    "./map.js": "./lib/native/map.js",
-    "./markdown.js": "./lib/native/markdown.js",
-    "./model.js": "./lib/native/model.js",
-    "./pdf.js": "./lib/native/pdf.js",
-    "./rive.js": "./lib/native/rive.js",
-    "./video.js": "./lib/native/video.js",
-    "./device.js": "./lib/native/device.js",
-    "./fs.js": "./lib/native/fs.js",
-    "./kv.js": "./lib/native/kv.js",
-    "./redux.js": "./lib/native/redux.js",
-    "./toast.js": "./lib/native/toast.js",
-    "./gesture.js": "./lib/native/gesture.js",
-    "./motion.js": "./lib/native/motion.js",
-    "./navigation.js": "./lib/native/navigation.js",
-    "./skeleton.js": "./lib/native/skeleton.js",
-    "./checkbox.js": "./lib/native/checkbox.js",
-    "./picker.js": "./lib/native/picker.js",
-    "./progress.js": "./lib/native/progress.js",
-    "./radio.js": "./lib/native/radio.js",
-    "./slider.js": "./lib/native/slider.js",
-    "./switch.js": "./lib/native/switch.js",
-    "./utils.js": "./lib/native/utils.js",
-    "./babel-plugin-iconify-extract.js": "./lib/native/babel-plugin-iconify-extract.js",
-    "./babel-plugin-iconify-transform.js": "./lib/native/babel-plugin-iconify-transform.js"
   },
   "peerDependencies": {
     "@candlefinance/faster-image": ">=1.7",
@@ -235,7 +203,7 @@
     "react": ">=19",
     "react-dom": ">=19",
     "react-map-gl": ">=7",
-    "react-native": ">=0.81",
+    "react-native": ">=0.80",
     "react-native-file-access": ">=3",
     "react-native-gesture-handler": ">=2",
     "react-native-mmkv": ">=3",

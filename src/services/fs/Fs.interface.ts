@@ -5,14 +5,14 @@ export * from './lib/core/hfs.types';
 
 export type HfsType =
   | 'local'
-  | 'ipfs'
+  // | 'ipfs'
   // | 'zip'
-  | 'rmc';
+  // | 'rmc';
 
 export interface FSBase {
   init(type?: HfsType): Promise<HfsImpl>,
   watch(path: string, callback: (records: Array<unknown>) => void): Promise<false | (() => void)>,
-  
+
   pick(options?: PickFilesOptions): Promise<Array<FileSystemOut>>,
   pickDirectory(options?: PickDirectoryOptions): Promise<Array<FileSystemOut>>,
 
