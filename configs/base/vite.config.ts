@@ -57,6 +57,7 @@ export default (platform: 'web' | 'native') => defineConfig(env => ({
         radio: 'src/widgets/radio/Radio.export',
         slider: 'src/widgets/slider/Slider.export',
         switch: 'src/widgets/switch/Switch.export',
+        textinput: 'src/widgets/textinput/TextInput.export',
         // Utils
         utils: 'src/utilities/index.ts',
         // Babel

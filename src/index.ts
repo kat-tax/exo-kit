@@ -35,6 +35,7 @@ export type * from './widgets/progress/Progress.export';
 export type * from './widgets/radio/Radio.export';
 export type * from './widgets/slider/Slider.export';
 export type * from './widgets/switch/Switch.export';
+export type * from './widgets/textinput/TextInput.export';
 
 // Plugins
 export type * from './assets/icon/babel-plugin/extract';

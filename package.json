@@ -1,6 +1,6 @@
 {
   "name": "react-exo",
-  "version": "0.20.7",
+  "version": "0.20.8",
   "type": "module",
   "types": "./lib/types/index.d.ts",
   "repository": {
@@ -163,6 +163,11 @@
       "types": "./lib/types/switch.d.ts",
       "browser": "./lib/web/switch.js",
       "react-native": "./lib/native/switch.js"
+    },
+    "./textinput": {
+      "types": "./lib/types/textinput.d.ts",
+      "browser": "./lib/web/textinput.js",
+      "react-native": "./lib/native/textinput.js"
     },
     "./utils": {
       "types": "./lib/types/utils.d.ts",
