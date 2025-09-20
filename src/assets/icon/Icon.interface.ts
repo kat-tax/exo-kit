@@ -1,6 +1,12 @@
 import type {StyleSheet} from 'react-native';
+import type {Mappings} from '../../unistyles';
 
-export type IconComponent = ((props: IconProps) => JSX.Element | null) & {
+export type IconComponent = ((
+  props: IconProps & {
+    /** Override color using Unistyles theme */
+    uniProps?: Mappings<IconProps>,
+  },
+) => JSX.Element | null) & {
   New: (
     icon?: React.ReactElement,
     styles?: StyleSheet.NamedStyles<object>,

@@ -1,6 +1,6 @@
 {
   "name": "react-exo",
-  "version": "0.20.9",
+  "version": "0.20.11",
   "type": "module",
   "types": "./lib/types/index.d.ts",
   "repository": {
