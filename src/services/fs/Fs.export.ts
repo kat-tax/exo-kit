@@ -2,6 +2,7 @@ import {FSService} from './Fs';
 
 export type * from './Fs.interface';
 export * as web from './lib/utils/web';
+export * as posix from './lib/core/posix';
 
 export const FS = new FSService();
 
