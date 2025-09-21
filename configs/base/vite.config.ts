@@ -26,6 +26,7 @@ export default (platform: 'web' | 'native') => defineConfig(env => ({
         // Entry
         index: 'src/index.ts',
         // Assets
+        avatar: 'src/assets/avatar/Avatar.export',
         book: 'src/assets/book/Book.export',
         code: 'src/assets/code/Code.export',
         game: 'src/assets/game/Game.export',
