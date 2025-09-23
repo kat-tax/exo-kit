@@ -1,5 +1,8 @@
 export default {}
 
+// Temporary for Figma -> React Native plugin
+// remove all index type exports when resolved
+
 // Assets
 export type * from './assets/book/Book.export';
 export type * from './assets/code/Code.export';

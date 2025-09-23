@@ -1,6 +1,6 @@
 {
   "name": "react-exo",
-  "version": "0.20.15",
+  "version": "0.20.17",
   "type": "module",
   "types": "./lib/types/index.d.ts",
   "repository": {
@@ -32,6 +32,11 @@
       "types": "./lib/types/book.d.ts",
       "browser": "./lib/web/book.js",
       "react-native": "./lib/native/book.js"
+    },
+    "./chart": {
+      "types": "./lib/types/chart.d.ts",
+      "browser": "./lib/web/chart.js",
+      "react-native": "./lib/native/chart.js"
     },
     "./code": {
       "types": "./lib/types/code.d.ts",
@@ -133,6 +138,11 @@
       "browser": "./lib/web/navigation.js",
       "react-native": "./lib/native/navigation.js"
     },
+    "./sheet": {
+      "types": "./lib/types/sheet.d.ts",
+      "browser": "./lib/web/sheet.js",
+      "react-native": "./lib/native/sheet.js"
+    },
     "./skeleton": {
       "types": "./lib/types/skeleton.d.ts",
       "browser": "./lib/web/skeleton.js",
@@ -179,10 +189,16 @@
       "browser": "./lib/web/utils.js",
       "react-native": "./lib/native/utils.js"
     },
+    "./sheet.css": "./lib/web/sheet.css",
     "./checkbox.css": "./lib/web/checkbox.css",
     "./radio.css": "./lib/web/radio.css",
     "./slider.css": "./lib/web/slider.css",
     "./switch.css": "./lib/web/switch.css",
+    "./demo/charts": {
+      "types": "./lib/types/demoCharts.d.ts",
+      "browser": "./lib/web/demoCharts.js",
+      "react-native": "./lib/native/demoCharts.js"
+    },
     "./babel-plugin-iconify-extract": {
       "types": "./lib/types/babel-plugin-iconify-extract.d.ts",
       "require": "./lib/native/babel-plugin-iconify-extract.cjs"
@@ -197,12 +213,14 @@
     "@helia/unixfs": ">=4",
     "@legendapp/list": "1.0.0-beta.8",
     "@legendapp/motion": ">=2",
+    "@lodev09/react-native-true-sheet": ">=2",
     "@lottiefiles/dotlottie-react": ">=0.12",
     "@react-native-community/checkbox": ">=0.5",
     "@react-native-community/netinfo": ">=11",
     "@react-native-community/slider": ">=4",
     "@react-native-picker/picker": ">=2",
     "@rive-app/react-canvas": ">=4",
+    "@wuba/react-native-echarts": ">=2",
     "@zip.js/zip.js": ">=2",
     "burnt": ">=0.12",
     "helia": ">=5",
@@ -242,6 +260,9 @@
     "@legendapp/motion": {
       "optional": true
     },
+    "@lodev09/react-native-true-sheet": {
+      "optional": true
+    },
     "@lottiefiles/dotlottie-react": {
       "optional": true
     },
@@ -258,6 +279,9 @@
       "optional": true
     },
     "@rive-app/react-canvas": {
+      "optional": true
+    },
+    "@wuba/react-native-echarts": {
       "optional": true
     },
     "@zip.js/zip.js": {
@@ -338,6 +362,7 @@
     "@reduxjs/toolkit": "^2.5.0",
     "blo": "^2.0.0",
     "comlink": "^4.4.2",
+    "echarts": "^6.0.0",
     "history": "^5.3.0",
     "idb-keyval": "^6.2.1",
     "react-content-loader": "^7.0.2",
@@ -346,7 +371,8 @@
     "redux": "^5.0.1",
     "redux-first-history": "^5.2.0",
     "redux-persist": "^6.0.0",
-    "thumbhash": "^0.1.1"
+    "thumbhash": "^0.1.1",
+    "vaul": "^1.1.2"
   },
   "devDependencies": {
     "@babel/types": "^7.26.3",
@@ -355,6 +381,7 @@
     "@humanwhocodes/retry": "^0.4.1",
     "@legendapp/list": "1.0.0-beta.8",
     "@legendapp/motion": "2.4.0",
+    "@lodev09/react-native-true-sheet": "^2.0.6",
     "@lottiefiles/dotlottie-react": "^0.12.0",
     "@react-native-community/checkbox": "^0.5.17",
     "@react-native-community/netinfo": "^11.4.1",
@@ -366,6 +393,7 @@
     "@types/react": "18.3.18",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react-swc": "^3.7.2",
+    "@wuba/react-native-echarts": "^2.0.3",
     "@zip.js/zip.js": "^2.7.57",
     "burnt": "^0.12.2",
     "concurrently": "^9.1.2",
@@ -408,7 +436,10 @@
       "react-native-readium@2.0.2": "patches/react-native-readium@2.0.2.patch",
       "@legendapp/list@1.0.0-beta.8": "patches/@legendapp__list@1.0.0-beta.8.patch",
       "@legendapp/motion@2.4.0": "patches/@legendapp__motion@2.4.0.patch"
-    }
+    },
+    "ignoredBuiltDependencies": [
+      "react-native-nitro-modules"
+    ]
   },
   "packageManager": "pnpm@10.11.0"
 }

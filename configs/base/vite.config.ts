@@ -28,6 +28,7 @@ export default (platform: 'web' | 'native') => defineConfig(env => ({
         // Assets
         avatar: 'src/assets/avatar/Avatar.export',
         book: 'src/assets/book/Book.export',
+        chart: 'src/assets/chart/Chart.export',
         code: 'src/assets/code/Code.export',
         game: 'src/assets/game/Game.export',
         icon: 'src/assets/icon/Icon.export',
@@ -44,6 +45,7 @@ export default (platform: 'web' | 'native') => defineConfig(env => ({
         grid: 'src/layout/grid/Grid.export',
         motion: 'src/layout/motion/Motion.export',
         navigation: 'src/layout/navigation/Navigation.export',
+        sheet: 'src/layout/sheet/Sheet.export',
         skeleton: 'src/layout/skeleton/Skeleton.export',
         // Services
         device: 'src/services/device/Device.export',
@@ -61,6 +63,8 @@ export default (platform: 'web' | 'native') => defineConfig(env => ({
         textinput: 'src/widgets/textinput/TextInput.export',
         // Utils
         utils: 'src/utilities/index.ts',
+        // Demo
+        demoCharts: 'src/assets/chart/demo/index.tsx',
         // Babel
         ...(platform === 'native' ? {
           'babel-plugin-iconify-extract': 'src/assets/icon/babel-plugin/extract.ts',
