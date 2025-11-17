@@ -12,4 +12,7 @@
     "assets/note": "custom",
   },
   "typescript.tsdk": "node_modules/typescript/lib",
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
 }

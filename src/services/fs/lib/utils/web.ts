@@ -9,7 +9,7 @@ import type {
 
 let _root: FileSystemDirectoryHandle | undefined;
 
-const HAS_FSA_PICKER = 'showDirectoryPicker' in window && (() => {
+const HAS_FSA_PICKER = typeof window !== 'undefined' && 'showDirectoryPicker' in window && (() => {
   try {return window.self === window.top} catch {return false;}
 })();
 

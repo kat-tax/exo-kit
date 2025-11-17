@@ -4,15 +4,19 @@ import {isText} from './lib/data';
 import type {FSBase, FileSystemIn, HfsType, PickFilesOptions, PickDirectoryOptions} from './Fs.interface';
 import type {HfsImpl} from './lib/core/hfs.types';
 
+import {mount as mountLocal} from './lib/core/backend/local';
+// import {mount as mountIpfs} from './lib/core/backend/ipfs';
+// import {mount as mountRmc} from './lib/core/backend/rmc';
+
 export class FSService implements FSBase {
-  async init(backend: HfsType = 'local', token?: string): Promise<HfsImpl> {
+  async init(backend: HfsType = 'local', _token?: string): Promise<HfsImpl> {
     switch (backend) {
       case 'local':
-        return (await import('./lib/core/backend/local')).mount();
-      case 'ipfs':
-        return (await import('./lib/core/backend/ipfs')).mount();
-      case 'rmc':
-        return (await import('./lib/core/backend/rmc')).mount(token);
+        return mountLocal();
+      // case 'ipfs':
+      //   return mountIpfs();
+      // case 'rmc':
+      //   return mountRmc(token);
       default:
         backend satisfies never;
     }

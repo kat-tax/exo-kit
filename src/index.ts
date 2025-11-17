@@ -1,5 +1,8 @@
 export default {}
 
+// Temporary for Figma -> React Native plugin
+// remove all index type exports when resolved
+
 // Assets
 export type * from './assets/book/Book.export';
 export type * from './assets/code/Code.export';
@@ -16,6 +19,7 @@ export type * from './assets/video/Video.export';
 
 // Layout
 export type * from './layout/gesture/Gesture.export';
+export type * from './layout/grid/Grid.export';
 export type * from './layout/motion/Motion.export';
 export type * from './layout/navigation/Navigation.export';
 export type * from './layout/skeleton/Skeleton.export';
@@ -34,6 +38,7 @@ export type * from './widgets/progress/Progress.export';
 export type * from './widgets/radio/Radio.export';
 export type * from './widgets/slider/Slider.export';
 export type * from './widgets/switch/Switch.export';
+export type * from './widgets/textinput/TextInput.export';
 
 // Plugins
 export type * from './assets/icon/babel-plugin/extract';

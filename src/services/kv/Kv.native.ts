@@ -1,10 +1,10 @@
-import {MMKV} from 'react-native-mmkv';
+import {createMMKV} from 'react-native-mmkv';
 import {validator} from './Kv.interface';
 import type {KVBase, KVDatabase} from './Kv.interface';
 
 export class KVService implements KVBase {
   init(id: string, version: number) {
-    const db = new MMKV({id, path: `v${version}`});
+    const db = createMMKV({id, path: `v${version}`});
     return <KVDatabase>{
       getItem: async (k, i) => {
         switch (true) {
@@ -21,7 +21,7 @@ export class KVService implements KVBase {
         }
       },
       setItem: async (k, v) => db.set(k, v),
-      removeItem: async (k) => db.delete(k),
+      removeItem: async (k) => {db.remove(k)},
       clear: async () => db.clearAll(),
     };
   }
